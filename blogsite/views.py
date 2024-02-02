@@ -12,7 +12,10 @@ from .forms import MailForm, ContactForm
 def index(request):
     latest_article = Article.objects.order_by("-pub_date")[1:4]
     last_article = Article.objects.order_by("-pub_date")[0:1]
-    categories_last_article = last_article[0].categories.all()
+    if len(last_article) != 0 :
+        categories_last_article = last_article[0].categories.all()
+    else:
+        categories_last_article = "None"
 
     featured_article = Article.objects.filter(featured = 1).values()
     popular_article = Article.objects.order_by("-popular")[:6]
@@ -32,7 +35,7 @@ def index(request):
     else : 
         form = MailForm()
 
-    context = {"latest_article" : latest_article, "featured_article": featured_article[0], "popular_article": popular_article, "last_article":last_article[0], "categories_last_article":categories_last_article,"form":form, "successForm":successForm}
+    context = {"latest_article" : latest_article, "featured_article": featured_article, "popular_article": popular_article, "last_article":last_article, "categories_last_article":categories_last_article,"form":form, "successForm":successForm}
 
 
     return render(request, "blog/index.html", context)
