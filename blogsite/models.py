@@ -61,3 +61,6 @@ class Contact(models.Model):
     message = models.TextField()
     def __str__(self):
         return self.sujet
+    
+class Test(models.Model):
+    upload = models.FileField(upload_to="blogsite/static/blog/images ")
