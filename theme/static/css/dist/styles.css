@@ -930,6 +930,10 @@ select {
   gap: 1.25rem;
 }
 
+.place-self-end {
+  place-self: end;
+}
+
 .place-self-center {
   place-self: center;
 }
@@ -1092,6 +1096,10 @@ select {
 
 .pt-4 {
   padding-top: 1rem;
+}
+
+.pt-5 {
+  padding-top: 1.25rem;
 }
 
 .text-center {
@@ -1371,6 +1379,10 @@ select {
 
   .xl\:text-left {
     text-align: left;
+  }
+
+  .xl\:text-right {
+    text-align: right;
   }
 
   .xl\:text-justify {
