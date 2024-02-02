@@ -1,0 +1,39 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Page de blog</title>
+
+        {% tailwind_css %}
+    </head>
+
+    <body class="font-montserrat">
+        {%block header%}
+        {%endblock%}
+        <span class="flex flex-row gap-5 text-md text-quaternary place-items-center pt-20 xl:px-20 px-5">{%for categorie in categories%} <span class="font-bold text-lg text-black"> {{categorie}}</span> {%endfor%}{{article.pub_date}}</span>
+        <div class="flex flex-col place-items-center">
+        <div><h1 class="text-5xl text-center py-5 pb-20 font-bold">{{article.title}}</h1></div>
+        <div class="px-20"><img src="{%static 'blog/images/'%}{{article.image}}" alt="article image" class="rounded-lg w-full max-h-128 object-cover"></div>
+        </div>
+        <div class="font-caveat text-justify xl:px-60 py-20 text-tertiary subpixel-antialiased	font-medium tracking-wide leading-relaxed text-pretty px-5">
+        <p>{{article.contexte}}</p>
+        <p class="py-10">{{article.content.paragraphe_1}}</p>
+        <blockquote class="p-4 my-4 border-s-4 border-gray-300 dark:border-gray-500">
+            <p class="text-xl italic font-medium leading-relaxed text-gray-900 dark:text-white">{{article.content.citation}}</p>
+            <p class="font-semibold">-  {{article.content.citation_auteur}}</p>
+        </blockquote>
+        <p class="py-10">{{article.content.paragraphe_2}}</p>
+        <img src="{%static 'blog/images/'%}{{article.image_illus}}" alt="image illustration" class="rounded-lg w-full max-h-96 object-cover">
+        <p class="pt-10">{{article.content.paragraphe_3}}</p>
+        </div>
+
+
+        {%block footer%}
+        {%endblock%}
+    </body>
+
+
+</html>

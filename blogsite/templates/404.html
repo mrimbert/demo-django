@@ -1,0 +1,51 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Page de blog</title>
+
+        {% tailwind_css %}
+    </head>
+
+    <body>
+        <header>
+            <div class="shadow grid xl:grid-cols-3 bg-blanc xl:h-32 top-0 left-0 right-0 place-items-center">
+                <div class="w-40 mt-8 justify-self-center">
+                    <p class="text-xl tracking-wide text-center">Test Django</p>
+                </div>
+                <div class="xl:grid xl:grid-rows-2 xl:pt-16 xl:justify-self-end justify-self-center pt-4 place-items-center">
+                    <div class="align-middle">
+                        <a href="article/" class="font-montserrat text-black text-xl tracking-wide px-5">Blog</a>
+                        <a href="about/" class="font-montserrat text-black text-xl tracking-wide xl:mx-10 px-5">A propos</a>
+                    </div>
+                </div>
+                <div class="xl:pt-14 justify-self-center align-middle py-5">
+                    <a class="w-auto text-center my-auto mx-auto w-auto py-2 px-10 bg-blanc border-primary text-primary font-montserrat rounded-lg inline-block box-border border-2 rounded-x1 hover:bg-primary hover:text-white hover:border-white duration-1000 h-12 font-bold " href="contact/">Contactez nous</a>
+                </div>
+                </div>
+        </header>
+
+        <div class="font-montserrat">
+            <h1 class="text-5xl">
+                Erreur 404
+            </h1>
+            <h1 class="text-5xl">
+                Page non trouvée
+            </h1>
+        </div>
+
+        <footer>
+            <div class="text-center bg-blanc font-montserrat py-10">
+                <h1 class="font-bold text-3xl">Site Test</h1>
+                <div class="flex flex-row text-center pt-10 justify-center gap-10">
+                    <a href="/">Accueil</a>
+                    <a href="article/">Blog</a>
+                    <a href="about/">A propos</a>
+                    <a href="contact/">Nous contacter</a>
+                </div>
+            </div>
+        </footer>
+    </body>

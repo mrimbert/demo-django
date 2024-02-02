@@ -1,0 +1,51 @@
+{% load static tailwind_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A propos</title>
+
+    <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+    {% tailwind_css %}
+
+</head>
+<body>
+    {%block header%}
+    {%endblock%}
+
+    <div class="flex flex-col text-center py-10 place-items-center">
+        <div><span class="">A propos</span></div>
+        <div> <h1 class="text-5xl py-5">Creative Blog Writting and publishing site</h1></div>
+        <div> <h3 class="text-tertiary max-w-screen-lg">Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</h3></div>
+    </div>
+    <div class="px-20 py-10"><img src="{%static 'blog/images/corpo.avif'%}" alt="article image" class="rounded-lg w-full max-w-full max-h-128 object-cover"></div>
+
+<div class="flex place-items-center items-center place-content-center justify-items-center">
+    <div class="xl:grid xl:grid-cols-3 px-20 py-20 place-items-center font-montserrat max-w-screen-xl gap-10">
+        <div class="grid grid-rows-2 max-w-96 hover:bg-primary rounded-lg transition duration-1000 p-5 hover:text-white">
+            <h1 class="text-5xl">01</h1>
+            <p class="font-medium py-3 text-2xl">Brainstorming</p>
+            <p><p>Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated</p></p>
+        </div>
+        <div class="grid grid-rows-2 max-w-96 hover:bg-primary rounded-lg transition duration-1000 p-5 hover:text-white">
+            <h1 class="text-5xl">02</h1>
+            <p class="font-medium py-3 text-2xl">Brainstorming</p>
+            <p><p>Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated</p></p>
+        </div>
+        <div class="grid grid-rows-2 max-w-96 hover:bg-primary rounded-lg transition duration-1000 p-5 hover:text-white">
+            <h1 class="text-5xl">03</h1>
+            <p class="font-medium py-3 text-2xl ">Brainstorming</p>
+            <p><p>Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated</p></p>
+        </div>
+        
+    </div>
+</div>
+
+
+
+    {%block footer%}
+    {%endblock%}
+</body>

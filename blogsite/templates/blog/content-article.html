@@ -1,0 +1,39 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Liste des articles</title>
+
+        {% tailwind_css %}
+    </head>
+
+    <body class="font-montserrat overflow-x-hidden">
+        {%block header%}
+        {%endblock%}
+
+        <div class="flex flex-col text-center py-10 place-items-center">
+            <div><span class="">Notre blog</span></div>
+            <div><h1 class="text-5xl py-5">Trouvez tous les articles ici</h1></div>
+            <div><h3 class="text-tertiary max-w-screen-lg">our blogs are written from very research research and well known writers writers so that  we can provide you the best blogs and articles articles for you to read them all along</h3></div>
+        </div>
+
+        <div class="xl:grid xl:grid-cols-3 xl:px-40 max-w-screen-sm xl:max-w-full pb-10">
+        {%for article in articles%}
+        <div class="grid grid-rows-2 place-items-center items-start py-5 xl:py-0">
+            <div><img src="{%static 'blog/images/'%}{{article.image}}" alt="blog image" class="rounded-lg w-auto h-96 max-w-96 max-h-96 object-fill"></div>
+            <div class="pt-4 max-w-prose pr-28 pl-28">
+                <span class="flex flex-row gap-5 text-xs text-quaternary place-items-center">{{article.pub_date}}</span><span class="font-bold text-lg text-black"></span>
+                <h2 class="text-3xl font-bold py-2 max-w-prose text-sm">{{article.title}}</h2>
+                <p class="font-caveat pb-5 text-justify max-w-prose text-sm">{{article.contexte}}</p>
+                <a href="../{{article.content_id}}/detail" class="text-primary">En savoir plus</a>
+            </div>
+        </div>
+        {%endfor%}
+        </div>
+
+        {%block footer%}
+        {%endblock%}
+    </body>

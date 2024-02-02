@@ -1,0 +1,54 @@
+{% load static tailwind_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de blog</title>
+
+    <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+    {% tailwind_css %}
+
+</head>
+<body>
+    {%block header%}
+    {%endblock%}
+
+    <div class="text-center font-montserrat py-10">
+        <h1 class="text-5xl font-bold py-10">Nous contacter</h1>
+        <form action="" method="post" class="max-w-md mx-auto">
+            {% csrf_token %}
+            <div class="relative z-0 w-full mb-5 group">
+                {{formContact.nom}}
+            </div>
+            <div class="relative z-0 w-full mb-5 group">
+                {{formContact.prenom}}
+            </div>
+            <div class="grid md:grid-cols-2 md:gap-6">
+            <div class="relative z-0 w-full mb-5 group">
+                {{formContact.tel}}
+            </div>
+            <div class="relative z-0 w-full mb-5 group">
+                {{formContact.sujet}}
+            </div>
+            </div>
+            <div class="pb-5">
+                {{formContact.message}}
+            </div>
+            <input type="submit" value="Soumettre" class="w-auto px-20 bg-primary border-blanc text-blanc font-montserrat rounded-lg inline-block box-border border-2 rounded-x1 hover:bg-blanc hover:text-primary hover:border-primary duration-1000 h-12 font-bold">
+    {%if success%}
+            <div class="pt-10">
+      <div class="p-4 mb-4 text-sm rounded-lg bg-green-200" role="alert">
+        <span class="font-medium">Succès !</span> Le formulaire a bien été envoyé
+      </div>
+    {%endif%}
+        </div>
+        </form>
+    </div>
+
+
+    {%block footer%}
+    {%endblock%}
+</body>
