@@ -38,8 +38,8 @@ class Article(GeneralInformation):
     categories = models.ManyToManyField(Categorie)
     featured = models.BooleanField()
     popular = models.IntegerField()
-    image = models.CharField(max_length=300)
-    image_illus = models.CharField(max_length=200)
+    image = models.ImageField(upload_to="images/")
+    image_illus = models.ImageField(upload_to="images/")
 
     def __str__(self):
         return self.title

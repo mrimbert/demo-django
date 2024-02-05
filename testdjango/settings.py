@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,7 +34,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'theme',
     'tailwind',
-    'django_browser_reload',
     'blogsite.apps.BlogsiteConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,7 +51,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = 'testdjango.urls'
@@ -67,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -83,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dbtest',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'super-secret-password',
         'HOST': '127.0.0.1', 
         'PORT': '3306',
     }
@@ -138,3 +138,6 @@ INTERNAL_IPS = [
 
 #Tailwind Config
 TAILWIND_APP_NAME = 'theme'
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')
