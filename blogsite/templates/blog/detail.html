@@ -37,7 +37,7 @@
         <form action="" method="post">
             {% csrf_token %}
             <div class="pb-5">
-                {%render_field form.mail class="text-black w-96 rounded-lg focus:border-primary"%}
+                {%render_field form.mail class="text-tertiary w-auto xl:w-96 rounded-lg focus:ring-2 focus:ring-slate-200 focus:border-slate-200 object-fit text-wrap"%}
             </div>
             <input type="submit" value="Soumettre" class="w-auto px-20 bg-inherit border-blanc text-blanc font-montserrat rounded-lg inline-block box-border border-2 rounded-x1 hover:bg-blanc hover:text-primary duration-1000 h-12 font-bold">
         </form>

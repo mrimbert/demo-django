@@ -24,7 +24,7 @@
             <span class="text-xl">Article mis en avant</span>
             <h1 class="text-5xl font-bold py-10 ">{{article.title}}</h1>
             <div class="flex flex-row place-content-center"><p class="font-caveat pb-10 text-justify xl:pr-40 max-w-screen-sm">{{article.contexte}}</p></div>
-            <a class="text-center my-auto mx-auto w-auto py-2 px-10 bg-blanc border-primary text-secondary font-montserrat rounded-lg inline-block box-border border-2 rounded-x1 hover:bg-primary hover:text-white hover:border-white duration-1000 h-12 font-bold" href="{{article.content_id}}/detail">En savoir plus</b></a>
+            <a class="text-center my-auto mx-auto w-auto h-full py-2 px-10 bg-blanc border-primary text-secondary font-montserrat rounded-lg inline-block box-border border-2 rounded-x1 hover:bg-primary hover:text-white hover:border-white duration-1000 h-12 font-bold" href="{{article.content_id}}/detail">En savoir plus</b></a>
         </div>
         <div class="flex flex-row place-content-center xl:py-20 xl:pr-10 row-start-1 xl:col-start-2 xl:row-start-auto sm:w-auto w-0 py-10">
             <img src="{{MEDIA_URL}}{{article.image}}" alt="Image from the featured article" class="rounded-lg sm:max-w-screen-sm">
@@ -50,7 +50,7 @@
                 <span class="flex flex-row gap-5 text-sm text-quaternary xl:place-content-start place-content-center text-center xl:text-left pt-10 xl:pt-0">{%for categorie in categories_last_article%} <span class="font-bold text-lg text-black"> {{categorie}}</span> {%endfor%}{{article.pub_date}}</span>
                 <h2 class="text-3xl font-bold py-10 xl:max-w-screen-sm">{{article.title}}</h2>
                <div class="flex flex-row place-content-center"> <p class="font-caveat pb-10 text-justify xl:pr-20 max-w-screen-sm text-wrap max-w-80 place-self-stretch truncate">{{article.contexte}}</p></div>
-                <a class="text-center my-auto mx-auto w-auto py-2 px-10 bg-blanc border-primary text-secondary font-montserrat rounded-lg inline-block box-border border-2 rounded-x1 hover:bg-primary hover:text-white hover:border-white duration-1000 h-12 font-bold" href="{{article.content_id}}/detail">En savoir plus</b></a>
+                <a class="text-center my-auto mx-auto w-auto h-full py-2 px-10 bg-blanc border-primary text-secondary font-montserrat rounded-lg inline-block box-border border-2 rounded-x1 hover:bg-primary hover:text-white hover:border-white duration-1000 h-12 font-bold" href="{{article.content_id}}/detail">En savoir plus</b></a>
 
             </div>
         </div>
