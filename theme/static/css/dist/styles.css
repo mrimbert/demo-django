@@ -767,6 +767,10 @@ select {
   order: 9999;
 }
 
+.row-start-1 {
+  grid-row-start: 1;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -830,16 +834,8 @@ select {
   max-height: 32rem;
 }
 
-.max-h-32 {
-  max-height: 8rem;
-}
-
 .max-h-96 {
   max-height: 24rem;
-}
-
-.w-0 {
-  width: 0px;
 }
 
 .w-40 {
@@ -852,6 +848,10 @@ select {
 
 .w-full {
   width: 100%;
+}
+
+.max-w-80 {
+  max-width: 20rem;
 }
 
 .max-w-96 {
@@ -886,6 +886,10 @@ select {
   flex-grow: 1;
 }
 
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
 .grid-rows-2 {
   grid-template-rows: repeat(2, minmax(0, 1fr));
 }
@@ -904,6 +908,14 @@ select {
 
 .place-items-center {
   place-items: center;
+}
+
+.place-items-baseline {
+  place-items: baseline;
+}
+
+.content-center {
+  align-content: center;
 }
 
 .items-start {
@@ -948,6 +960,16 @@ select {
 
 .overflow-x-hidden {
   overflow-x: hidden;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-wrap {
+  text-wrap: wrap;
 }
 
 .text-pretty {
@@ -1076,10 +1098,6 @@ select {
 
 .pr-10 {
   padding-right: 2.5rem;
-}
-
-.pr-20 {
-  padding-right: 5rem;
 }
 
 .pr-28 {
@@ -1284,6 +1302,14 @@ select {
 }
 
 @media (min-width: 1280px) {
+  .xl\:col-start-2 {
+    grid-column-start: 2;
+  }
+
+  .xl\:row-start-auto {
+    grid-row-start: auto;
+  }
+
   .xl\:mx-10 {
     margin-left: 2.5rem;
     margin-right: 2.5rem;
@@ -1301,8 +1327,16 @@ select {
     height: 8rem;
   }
 
+  .xl\:max-h-none {
+    max-height: none;
+  }
+
   .xl\:w-auto {
     width: auto;
+  }
+
+  .xl\:max-w-96 {
+    max-width: 24rem;
   }
 
   .xl\:max-w-full {
@@ -1333,6 +1367,10 @@ select {
     flex-direction: row;
   }
 
+  .xl\:place-content-start {
+    place-content: start;
+  }
+
   .xl\:justify-self-end {
     justify-self: end;
   }
@@ -1357,8 +1395,25 @@ select {
     padding-bottom: 0px;
   }
 
+  .xl\:py-20 {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .xl\:pb-20 {
+    padding-bottom: 5rem;
+  }
+
+  .xl\:pl-20 {
+    padding-left: 5rem;
+  }
+
   .xl\:pl-28 {
     padding-left: 7rem;
+  }
+
+  .xl\:pr-20 {
+    padding-right: 5rem;
   }
 
   .xl\:pr-28 {
@@ -1367,6 +1422,10 @@ select {
 
   .xl\:pr-40 {
     padding-right: 10rem;
+  }
+
+  .xl\:pt-0 {
+    padding-top: 0px;
   }
 
   .xl\:pt-14 {
@@ -1384,9 +1443,15 @@ select {
   .xl\:text-right {
     text-align: right;
   }
+}
 
-  .xl\:text-justify {
-    text-align: justify;
+@media (min-width: 1536px) {
+  .\32xl\:grid {
+    display: grid;
+  }
+
+  .\32xl\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
