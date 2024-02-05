@@ -59,7 +59,7 @@
         <p class="text-3xl font-montserrat text-center py-20">Désolé, il n'y a rien à afficher ici</p>
         {%endif%}
 
-        <div class="2xl:grid 2xl:grid-cols-3 pt-20 xl:max-w-full">
+        <div class="2xl:grid 2xl:grid-cols-3 pt-20 xl:max-w-full gap-5">
             {%for article in latest_article%}
             <div class="grid grid-rows-2 place-items-center">
                 <div><img src="{{MEDIA_URL}}{{article.image}}" alt="blog image" class="rounded-lg h-96 max-w-80 max-h-96 object-fill"></div>
