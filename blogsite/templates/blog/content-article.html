@@ -21,14 +21,14 @@
         </div>
 
         <div class="flex flex-row place-content-center">
-        <div class="2xl:grid 2xl:grid-cols-3 2xl:px-40 max-w-screen-sm 2xl:max-w-full pb-10">
+        <div class="2xl:grid 2xl:grid-cols-3 2xl:px-40 sm:max-w-screen-sm 2xl:max-w-full pb-10">
         {%for article in articles%}
         <div class="grid grid-rows-2 place-items-center items-start py-5 xl:py-0">
-            <div class="flex flex-row place-content-center"><img src="{{article.image.url}}" alt="Latest article picture" class="rounded-lg xl:max-w-96 max-w-80 max-h-96 xl:max-h-none object-fill h-96 "></div>
+            <div class="flex flex-row place-content-center"><img src="{{article.image.url}}" alt="Latest article picture" class="rounded-lg xl:max-w-96 max-w-80 max-h-96 xl:max-h-none object-fill h-96"></div>
             <div class="pt-4 xl:pr-28 xl:pl-28">
-                <span class="flex flex-row gap-5 text-xs text-quaternary place-items-center">{{article.pub_date}}</span><span class="font-bold text-lg text-black"></span>
-                <h2 class="text-3xl font-bold py-2 max-w-prose text-sm">{{article.title}}</h2>
-                <p class="font-caveat text-justify pb-5 text-sm self-top place-self-stretch max-w-80 xl:max-w-96 truncate text-wrap">{{article.contexte}}</p>
+                <span class="flex flex-row gap-5 text-xs text-quaternary place-items-center px-5">{{article.pub_date}}</span><span class="font-bold text-lg text-black"></span>
+                <h2 class="text-3xl font-bold py-2 max-w-prose text-sm px-5">{{article.title}}</h2>
+                <p class="font-caveat text-justify pb-5 text-sm self-top place-self-stretch max-w-80 xl:max-w-96 truncate text-wrap px-5">{{article.contexte}}</p>
                 <a href="../{{article.content_id}}/detail" class="text-primary">En savoir plus</a>
             </div>
         </div>

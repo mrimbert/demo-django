@@ -6,6 +6,9 @@
 # Node artifact files
 theme/node_modules/
 
+#Uploaded file on Admin Panel
+media/
+
 # Maven
 target/
 

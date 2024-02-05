@@ -17,7 +17,7 @@
     {%endblock%}
 
 
-    <div class="grid xl:grid-cols-2 grid-rows-2 xl:grid-rows-1 bg-primary text-blanc place-items-center font-montserrat">
+    <div class="grid xl:grid-cols-2 sm:grid-rows-2 xl:grid-rows-1 bg-primary text-blanc place-items-center font-montserrat grid-rows-1">
         {%if featured_article%}
         {%for article in featured_article%}
         <div class="xl:py-20 py-5 align-self px-20 text-center xl:text-left">
@@ -26,8 +26,8 @@
             <div class="flex flex-row place-content-center"><p class="font-caveat pb-10 text-justify xl:pr-40 max-w-screen-sm">{{article.contexte}}</p></div>
             <a class="text-center my-auto mx-auto w-auto py-2 px-10 bg-blanc border-primary text-secondary font-montserrat rounded-lg inline-block box-border border-2 rounded-x1 hover:bg-primary hover:text-white hover:border-white duration-1000 h-12 font-bold" href="{{article.content_id}}/detail">En savoir plus</b></a>
         </div>
-        <div class="flex flex-row place-content-center xl:py-20 pr-10 row-start-1 xl:col-start-2 xl:row-start-auto">
-            <img src="{{MEDIA_URL}}{{article.image}}" alt="Image from the featured article" class="rounded-lg max-w-screen-sm xl:w-auto">
+        <div class="flex flex-row place-content-center xl:py-20 pr-10 row-start-1 xl:col-start-2 xl:row-start-auto sm:w-auto w-0 py-10">
+            <img src="{{MEDIA_URL}}{{article.image}}" alt="Image from the featured article" class="rounded-lg sm:max-w-screen-sm">
             </div>
         </div>
         {%endfor%}
