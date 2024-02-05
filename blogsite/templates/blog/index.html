@@ -3,7 +3,7 @@
 
 {%block header%}
 <header>
-    <div class="shadow grid xl:grid-cols-3 bg-blanc xl:h-32 top-0 left-0 right-0 place-items-center text-center">
+    <div class="shadow-lg shadow-neutral-900 grid xl:grid-cols-3 bg-blanc xl:h-32 top-0 left-0 right-0 place-items-center text-center">
         <div class="w-40 mt-8 justify-self-center">
             <a class="text-xl tracking-wide text-center" href=" ">Test Django</a>
         </div>
@@ -35,8 +35,8 @@
         <h1 class="text-5xl font-bold py-10">S'inscrire à la newsletter</h1>
         <form action="" method="post">
             {% csrf_token %}
-            <div class="pb-5">
-                {%render_field form.mail class="text-black w-96 rounded-lg focus:border-primary"%}
+            <div class="pb-5 ">
+                {%render_field form.mail class="text-black w-auto xl:w-96 rounded-lg focus:border-primary object-fit text-wrap"%}
             </div>
             <input type="submit" value="Soumettre" class="w-auto px-20 bg-inherit border-blanc text-blanc font-montserrat rounded-lg inline-block box-border border-2 rounded-x1 hover:bg-blanc hover:text-primary duration-1000 h-12 font-bold">
         </form>
