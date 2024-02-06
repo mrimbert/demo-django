@@ -826,6 +826,10 @@ select {
   height: 3rem;
 }
 
+.h-7 {
+  height: 1.75rem;
+}
+
 .h-96 {
   height: 24rem;
 }
@@ -848,6 +852,10 @@ select {
 
 .w-40 {
   width: 10rem;
+}
+
+.w-7 {
+  width: 1.75rem;
 }
 
 .w-auto {
@@ -1318,6 +1326,10 @@ select {
   transition-duration: 300ms;
 }
 
+.duration-500 {
+  transition-duration: 500ms;
+}
+
 .hover\:border-primary:hover {
   --tw-border-opacity: 1;
   border-color: rgb(124 78 228 / var(--tw-border-opacity));
@@ -1336,6 +1348,10 @@ select {
 .hover\:bg-primary:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(124 78 228 / var(--tw-bg-opacity));
+}
+
+.hover\:stroke-primary:hover {
+  stroke: #7C4EE4;
 }
 
 .hover\:text-primary:hover {

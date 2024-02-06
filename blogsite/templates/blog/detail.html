@@ -9,8 +9,8 @@
         </div>
         <div class="xl:grid xl:grid-rows-2 xl:pt-16 xl:justify-self-end justify-self-center pt-4 place-items-center">
             <div class="align-middle">
-                <a href="../article/" class="font-montserrat text-black text-xl tracking-wide px-5 hover:text-primary transition duration-300">Blog</a>
-                <a href="../about/" class="font-montserrat text-black text-xl tracking-wide xl:mx-10 px-5 hover:text-primary transition duration-300">A propos</a>
+                <a href="../../article/" class="font-montserrat text-black text-xl tracking-wide px-5 hover:text-primary transition duration-300">Blog</a>
+                <a href="../../about/" class="font-montserrat text-black text-xl tracking-wide xl:mx-10 px-5 hover:text-primary transition duration-300">A propos</a>
             </div>
         </div>
         <div class="xl:pt-14 justify-self-center align-middle py-5">
@@ -23,6 +23,13 @@
             <div class="pt-10">
             <div class="p-4 mb-4 text-sm rounded-lg bg-green-200 text-center" role="alert">
              <span class="font-medium">Succès !</span> Le formulaire a bien été envoyé
+            </div>
+{%endif%}
+
+{%if successLike%}
+            <div class="pt-10">
+            <div class="p-4 mb-4 text-sm rounded-lg bg-green-200 text-center" role="alert">
+             <span class="font-medium">Succès !</span> Votre "like" a bien été pris en compte
             </div>
 {%endif%}
 

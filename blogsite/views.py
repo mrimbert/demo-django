@@ -42,6 +42,7 @@ def index(request):
 
 def detail(request, article_id):
     successForm = request.GET.get('successForm',False)
+    successLike = request.GET.get('successLike', False)
 
     form = MailForm(request.POST)
     if form.is_valid():
@@ -55,7 +56,14 @@ def detail(request, article_id):
          form = MailForm()
     
     article = get_object_or_404(Article, pk=article_id)
-    context = {"article": article, "form":form, "successForm":successForm}
+
+    if 'like' in request.POST:
+        article.popular += 1
+        article.save()
+
+        return redirect("./?successLike=True")
+
+    context = {"article": article, "form":form, "successForm":successForm, "successLike":successLike}
     return render(request, "blog/detail.html", context)
 
 def article(request):

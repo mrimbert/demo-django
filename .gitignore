@@ -9,6 +9,9 @@ theme/node_modules/
 #Uploaded file on Admin Panel
 media/
 
+*.pyc
+__pycache__/
+
 # Maven
 target/
 

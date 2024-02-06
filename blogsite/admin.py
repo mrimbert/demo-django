@@ -11,9 +11,9 @@ admin.site.register(Test)
 # Register your models here.
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ["title", "pub_date", "mod_date"]
+    list_display = ["title", "pub_date", "mod_date", "popular"]
     ordering = ["-mod_date"]
-    list_filter = ["mod_date"]
+    list_filter = ["mod_date", "popular"]
     search_fields = ["title"]
 
 
