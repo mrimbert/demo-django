@@ -66,20 +66,22 @@ def detail(request, slug):
         article.popular += 1
         article.save()
         request.session["has_liked" + slug] = True
+        request.session["has_disliked" + slug] = False
 
         return redirect("./?successLike=True")
     
     if 'dislike' in request.POST:
-        if request.session.get("has_liked" + slug, False):
+        if request.session.get("has_disliked" + slug, False):
             return redirect("./?successLike=already")
         if(article.popular > 0):
             article.popular -= 1
         article.save()
-        request.session["has_liked" + slug] = True
+        request.session["has_liked" + slug] = False
+        request.session["has_disliked" + slug] = True
 
         return redirect("./?successLike=True")
 
-    context = {"article": article, "form":form, "successForm":successForm, "successLike":successLike, "popular_article": popular_article}
+    context = {"article": article, "form":form, "successForm":successForm, "successLike":successLike, "popular_article": popular_article, "has_liked": request.session.get("has_liked" + slug), "has_disliked": request.session.get("has_disliked" + slug)}
     return render(request, "blog/detail.html", context)
 
 def article(request):

@@ -1099,6 +1099,10 @@ select {
   --tw-gradient-to: #5b21b6 var(--tw-gradient-to-position);
 }
 
+.stroke-primary {
+  stroke: #7C4EE4;
+}
+
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
