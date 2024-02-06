@@ -68,7 +68,8 @@ module.exports = {
                 '128':'32rem',
             },
             spacing: {
-                '128':'600px'
+                '128':'600px',
+                '112':'450px'
             }
         },
         fontFamily: {
