@@ -26,10 +26,17 @@
             </div>
 {%endif%}
 
-{%if successLike%}
+{%if successLike and successLike != 'already'%}
             <div class="pt-10">
             <div class="p-4 mb-4 text-sm rounded-lg bg-green-200 text-center" role="alert">
              <span class="font-medium">Succès !</span> Votre "like" a bien été pris en compte
+            </div>
+{%endif%}
+
+{%if successLike == 'already'%}
+            <div class="pt-10">
+            <div class="p-4 mb-4 text-sm rounded-lg bg-orange-200 text-center" role="alert">
+             <span class="font-medium">Erreur </span> Tu as déjà liké cette article !
             </div>
 {%endif%}
 

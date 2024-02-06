@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.template import RequestContext
 
 
@@ -61,15 +61,21 @@ def detail(request, slug):
     article = get_object_or_404(Article, slug=slug)
 
     if 'like' in request.POST:
+        if request.session.get("has_liked" + slug, False):
+            return redirect("./?successLike=already")
         article.popular += 1
         article.save()
+        request.session["has_liked" + slug] = True
 
         return redirect("./?successLike=True")
     
     if 'dislike' in request.POST:
+        if request.session.get("has_liked" + slug, False):
+            return redirect("./?successLike=already")
         if(article.popular > 0):
             article.popular -= 1
         article.save()
+        request.session["has_liked" + slug] = True
 
         return redirect("./?successLike=True")
 
