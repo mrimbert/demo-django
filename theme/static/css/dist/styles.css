@@ -842,6 +842,10 @@ select {
   max-height: 32rem;
 }
 
+.max-h-72 {
+  max-height: 18rem;
+}
+
 .max-h-96 {
   max-height: 24rem;
 }
@@ -864,6 +868,10 @@ select {
 
 .w-full {
   width: 100%;
+}
+
+.max-w-72 {
+  max-width: 18rem;
 }
 
 .max-w-80 {
@@ -1166,8 +1174,16 @@ select {
   padding-top: 2.5rem;
 }
 
+.pt-2 {
+  padding-top: 0.5rem;
+}
+
 .pt-20 {
   padding-top: 5rem;
+}
+
+.pt-3 {
+  padding-top: 0.75rem;
 }
 
 .pt-4 {
@@ -1311,6 +1327,11 @@ select {
 
 .shadow-neutral-900 {
   --tw-shadow-color: #171717;
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.shadow-purple-800 {
+  --tw-shadow-color: #6b21a8;
   --tw-shadow: var(--tw-shadow-colored);
 }
 
@@ -1480,6 +1501,10 @@ select {
 
   .xl\:w-96 {
     width: 24rem;
+  }
+
+  .xl\:max-w-80 {
+    max-width: 20rem;
   }
 
   .xl\:max-w-96 {

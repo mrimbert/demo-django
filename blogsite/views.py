@@ -44,6 +44,9 @@ def detail(request, article_id):
     successForm = request.GET.get('successForm',False)
     successLike = request.GET.get('successLike', False)
 
+    popular_article = Article.objects.order_by("-popular")[:3]
+
+
     form = MailForm(request.POST)
     if form.is_valid():
         email = request.POST.get("mail")
@@ -70,7 +73,7 @@ def detail(request, article_id):
 
         return redirect("./?successLike=True")
 
-    context = {"article": article, "form":form, "successForm":successForm, "successLike":successLike}
+    context = {"article": article, "form":form, "successForm":successForm, "successLike":successLike, "popular_article": popular_article}
     return render(request, "blog/detail.html", context)
 
 def article(request):
