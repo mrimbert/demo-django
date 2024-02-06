@@ -747,20 +747,44 @@ select {
   position: relative;
 }
 
+.inset-80 {
+  inset: 20rem;
+}
+
+.-bottom-3 {
+  bottom: -0.75rem;
+}
+
 .left-0 {
   left: 0px;
+}
+
+.left-128 {
+  left: 600px;
 }
 
 .right-0 {
   right: 0px;
 }
 
+.right-128 {
+  right: 600px;
+}
+
 .top-0 {
   top: 0px;
 }
 
+.top-80 {
+  top: 20rem;
+}
+
 .z-0 {
   z-index: 0;
+}
+
+.z-20 {
+  z-index: 20;
 }
 
 .order-last {
@@ -826,6 +850,10 @@ select {
   height: 3rem;
 }
 
+.h-128 {
+  height: 600px;
+}
+
 .h-7 {
   height: 1.75rem;
 }
@@ -840,6 +868,10 @@ select {
 
 .max-h-128 {
   max-height: 32rem;
+}
+
+.max-h-32 {
+  max-height: 8rem;
 }
 
 .max-h-72 {
@@ -1079,6 +1111,11 @@ select {
 
 .bg-transparent {
   background-color: transparent;
+}
+
+.bg-zinc-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(244 244 245 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-r {
@@ -1338,11 +1375,6 @@ select {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.shadow-black {
-  --tw-shadow-color: #000;
-  --tw-shadow: var(--tw-shadow-colored);
-}
-
 .shadow-purple-800 {
   --tw-shadow-color: #6b21a8;
   --tw-shadow: var(--tw-shadow-colored);
@@ -1454,6 +1486,10 @@ select {
   .sm\:px-20 {
     padding-left: 5rem;
     padding-right: 5rem;
+  }
+
+  .sm\:pt-10 {
+    padding-top: 2.5rem;
   }
 
   .sm\:text-5xl {
@@ -1635,6 +1671,10 @@ select {
 }
 
 @media (min-width: 1536px) {
+  .\32xl\:absolute {
+    position: absolute;
+  }
+
   .\32xl\:grid {
     display: grid;
   }
@@ -1647,9 +1687,18 @@ select {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .\32xl\:bg-white {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  }
+
   .\32xl\:px-40 {
     padding-left: 10rem;
     padding-right: 10rem;
+  }
+
+  .\32xl\:pb-96 {
+    padding-bottom: 24rem;
   }
 }
 

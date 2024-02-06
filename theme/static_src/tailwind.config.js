@@ -66,6 +66,9 @@ module.exports = {
             },
             maxHeight: {
                 '128':'32rem',
+            },
+            spacing: {
+                '128':'600px'
             }
         },
         fontFamily: {

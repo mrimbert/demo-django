@@ -13,11 +13,13 @@
     {% tailwind_css %}
 
 </head>
-<body>
+<body class="bg-zinc-100">
     {%block header%}
     {%endblock%}
 
-    <div class="text-center font-montserrat py-10">
+    <div class="static 2xl:pb-96 pb-10 pt-20">
+        <img src="{%static '/blog/images/map.avif'%}" alt="" class="max-h-128 w-full object-cover h-128">
+    <div class="text-center font-montserrat 2xl:absolute inset-80 2xl:bg-white left-128 right-128 top-80 -bottom-3 rounded-lg z-20 px-10 ">
         <h1 class="text-5xl font-bold py-10">Nous contacter</h1>
         <form action="" method="post" class="max-w-md mx-auto">
             {% csrf_token %}
@@ -36,7 +38,7 @@
             </div>
             </div>
             <div class="pb-5">
-                {%render_field formContact.message class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary resize-none peer"%}
+                {%render_field formContact.message class="block py-2.5 px-0 max-h-32 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary resize-none peer"%}
             </div>
             <input type="submit" value="Soumettre" class="w-auto px-20 bg-primary border-blanc text-blanc font-montserrat rounded-lg inline-block box-border border-2 rounded-x1 hover:bg-blanc hover:text-primary hover:border-primary duration-1000 h-12 font-bold">
     {%if success%}
@@ -48,6 +50,8 @@
         </div>
         </form>
     </div>
+</div>
+
 
 
     {%block footer%}

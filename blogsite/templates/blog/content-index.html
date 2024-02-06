@@ -12,7 +12,7 @@
     {% tailwind_css %}
 
 </head>
-<body class="overflow-x-hidden">
+<body class="overflow-x-hidden bg-zinc-100">
     {%block header%}
     {%endblock%}
 
@@ -22,8 +22,8 @@
         <div class="xl:py-20 py-5 align-self px-20 text-center xl:text-left">
             <span class="text-xl">Article mis en avant</span>
             <h1 class="text-5xl font-bold py-10 ">{{article.title}}</h1>
-            <div class="flex flex-row place-content-center"><p class="font-caveat pb-10 text-justify xl:pr-40 max-w-screen-sm">{{article.contexte}}</p></div>
-            <a class="text-center my-auto mx-auto w-auto h-full py-2 px-10 bg-blanc border-primary text-secondary font-montserrat rounded-lg inline-block box-border border-2 rounded-x1 hover:bg-primary hover:text-white hover:border-white duration-1000 h-12 font-bold" href="{{article.slug}}/detail">En savoir plus</b></a>
+            <div class="flex flex-row place-content-center"><p class="font-caveat pb-10 text-justify xl:pr-40 max-w-screen-sm troncate">{{article.contexte}}</p></div>
+            <a class="text-center my-auto mx-auto w-auto h-full py-2 px-10 bg-blanc border-primary text-secondary font-montserrat rounded-lg inline-block box-border border-2 rounded-x1 hover:bg-primary hover:text-white hover:border-white duration-1000 h-12 font-bold troncate" href="{{article.slug}}/detail">En savoir plus</b></a>
         </div>
         <div class="flex flex-row place-content-center xl:py-20 xl:pr-10 row-start-1 xl:col-start-2 xl:row-start-auto sm:w-auto w-0 py-10">
             <img src="{{MEDIA_URL}}{{article.image}}" alt="Image from the featured article" class="shadow-lg shadow-purple-800 rounded-lg sm:max-w-screen-sm">
@@ -62,7 +62,7 @@
             {%for article in latest_article%}
             <div class="grid grid-rows-2 place-items-center">
                 <div><img src="{{MEDIA_URL}}{{article.image}}" alt="blog image" class="rounded-lg h-96 max-w-80 max-h-96 object-fill"></div>
-                <div class="pt-10 xl:pr-28 xl:pl-28">
+                <div class="sm:pt-10 xl:pr-28 xl:pl-28">
                     <span class="flex flex-row gap-5 text-xs text-quaternary place-items-center">{{article.pub_date}}</span>
                     <h2 class="text-3xl font-bold py-2 max-w-96 text-sm">{{article.title}}</h2>
                     <p class="font-caveat text-justify pb-5 text-sm self-top place-self-stretch max-w-80 xl:max-w-96 truncate text-wrap">{{article.contexte}}</p>
