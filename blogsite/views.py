@@ -62,6 +62,13 @@ def detail(request, article_id):
         article.save()
 
         return redirect("./?successLike=True")
+    
+    if 'dislike' in request.POST:
+        if(article.popular > 0):
+            article.popular -= 1
+        article.save()
+
+        return redirect("./?successLike=True")
 
     context = {"article": article, "form":form, "successForm":successForm, "successLike":successLike}
     return render(request, "blog/detail.html", context)
