@@ -66,7 +66,7 @@
                     <span class="flex flex-row gap-5 text-xs text-quaternary place-items-center">{{article.pub_date}}</span>
                     <h2 class="text-3xl font-bold py-2 max-w-72 text-sm">{{article.title}}</h2>
                     <p class="font-caveat text-justify pb-5 text-xs self-top place-self-stretch max-w-72 xl:max-w-80 truncate text-wrap">{{article.contexte}}</p>
-                    <div><a href="{{article.content_id}}/detail" class="text-primary">En savoir plus</a></div>
+                    <div><a href="../../{{article.slug}}/detail" class="text-primary">En savoir plus</a></div>
                 </div>
             </div>
             {%endfor%}

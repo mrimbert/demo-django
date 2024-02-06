@@ -22,6 +22,7 @@ class GeneralInformation(models.Model):
         primary_key = True,
     )
     contexte = models.CharField(max_length=2000)
+    slug = models.SlugField(default="",null=False)
 
     class Meta:
         abstract = True

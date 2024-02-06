@@ -15,6 +15,7 @@ class ArticleAdmin(admin.ModelAdmin):
     ordering = ["-mod_date"]
     list_filter = ["mod_date", "popular"]
     search_fields = ["title"]
+    prepopulated_fields = {"slug":("title",)}
 
 
 admin.site.register(Article, ArticleAdmin)

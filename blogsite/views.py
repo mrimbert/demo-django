@@ -40,7 +40,7 @@ def index(request):
 
     return render(request, "blog/index.html", context)
 
-def detail(request, article_id):
+def detail(request, slug):
     successForm = request.GET.get('successForm',False)
     successLike = request.GET.get('successLike', False)
 
@@ -58,7 +58,7 @@ def detail(request, article_id):
     else : 
          form = MailForm()
     
-    article = get_object_or_404(Article, pk=article_id)
+    article = get_object_or_404(Article, slug=slug)
 
     if 'like' in request.POST:
         article.popular += 1
