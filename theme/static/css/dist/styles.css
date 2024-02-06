@@ -807,6 +807,10 @@ select {
   margin-bottom: auto;
 }
 
+.-mt-24 {
+  margin-top: -6rem;
+}
+
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -851,10 +855,6 @@ select {
   height: 3rem;
 }
 
-.h-128 {
-  height: 600px;
-}
-
 .h-7 {
   height: 1.75rem;
 }
@@ -869,6 +869,10 @@ select {
 
 .max-h-128 {
   max-height: 32rem;
+}
+
+.max-h-256 {
+  max-height: 40rem;
 }
 
 .max-h-32 {

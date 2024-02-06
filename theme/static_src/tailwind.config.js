@@ -66,6 +66,7 @@ module.exports = {
             },
             maxHeight: {
                 '128':'32rem',
+                '256':'40rem',
             },
             spacing: {
                 '128':'600px',
