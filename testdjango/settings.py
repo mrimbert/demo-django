@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_non_dark_admin',
     'widget_tweaks',
     'theme',
     'tailwind',
@@ -142,3 +143,5 @@ TAILWIND_APP_NAME = 'theme'
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')
+
+DISABLE_DARK_MODE = True
