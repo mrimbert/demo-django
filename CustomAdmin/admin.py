@@ -26,7 +26,6 @@ admin.site.register(Utilisateur)
 admin.site.register(Contact)
 admin.site.register(Contenu)
 admin.site.register(Categorie)
-admin.site.register(Test)
 
 # Register your models here.
 
