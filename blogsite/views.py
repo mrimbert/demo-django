@@ -94,7 +94,11 @@ def detail(request, slug):
 
 def article(request):
     successForm = request.GET.get('successForm',False)
-    latest_article = Article.objects.order_by("-pub_date")
+    if request.method == 'GET' and request.GET.get('search') != None:
+        latest_article = Article.objects.filter(title__icontains=request.GET.get('search'))
+    else : 
+        latest_article = Article.objects.order_by("-pub_date")
+
     L = []
     for article in latest_article:
         art = []
