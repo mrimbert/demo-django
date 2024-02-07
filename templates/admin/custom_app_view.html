@@ -15,7 +15,7 @@
 {% endblock %}
  
 {% block result_list %}
-<p class="text-center text-5xl font-montserrat">Graphe d'utilisation</p>
+<p class="text-center text-5xl font-montserrat">Graphes d'utilisation</p>
 <div class="grid xl:grid-cols-3 grid-rows-3 xl:grid-rows-1 py-10 gap-5 xl:place-items-stretch place-items-center w-auto align-center">
 <div class="max-w-screen-sm w-auto">
   <canvas id="myChart"></canvas>
@@ -28,8 +28,36 @@
 </div>
 </div>
 
-<p class="text-center text-5xl font-montserrat">Statistiques d'utilisation</p>
+<p class="text-center text-5xl font-montserrat py-10">Statistiques d'utilisation</p>
 
+<div class="flex flex-col place-items-center">
+<table class="table-auto max-w-screen-sm">
+  <thead>
+    <tr>
+      <th>Nom de la donnée</th>
+      <th>Valeur</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Total de vues :</td> 
+      <td>{{totalViews}}</td>
+    </tr>
+    <tr>
+      <td>Total de likes :</td> 
+      <td>{{totalLikes}}</td>
+    </tr>
+    <tr>
+      <td>Nombre d'articles :</td> 
+      <td>{{totalArticle}}</td>
+    </tr>
+    <tr>
+      <td>Nombre de catégories :</td> 
+      <td>{{totalCategorie}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -103,7 +131,8 @@
     options: {
       scales: {
         y: {
-          beginAtZero: true
+          beginAtZero: true,
+          max: 1
         }
       },
       plugins:{
