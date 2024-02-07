@@ -42,6 +42,7 @@ class Article(GeneralInformation):
     popular = models.IntegerField()
     image = models.ImageField(upload_to="images/")
     image_illus = models.ImageField(upload_to="images/")
+    views = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title

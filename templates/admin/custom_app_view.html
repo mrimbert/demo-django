@@ -24,7 +24,7 @@
   <canvas id="Chart2"></canvas>
 </div>
 <div class="max-w-screen-sm">
-  Test2
+  <canvas id="Chart3"></canvas>
 </div>
 </div>
 
@@ -62,8 +62,29 @@
     data: {
       labels: {{article|safe}},
       datasets: [{
-        label: '# of Votes',
-        data: {{like|safe}},
+        label: 'Vues',
+        data: {{views|safe}},
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  const chart3 = document.getElementById('Chart3');
+
+  new Chart(Chart3, {
+    type: 'bar',
+    data: {
+      labels: {{article|safe}},
+      datasets: [{
+        label: 'Rapport like/vue',
+        data: {{views_per_like|safe}},
         borderWidth: 1
       }]
     },
