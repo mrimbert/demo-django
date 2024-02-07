@@ -985,6 +985,10 @@ select {
   flex-grow: 1;
 }
 
+.table-auto {
+  table-layout: auto;
+}
+
 .resize-none {
   resize: none;
 }
@@ -997,10 +1001,6 @@ select {
 
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-
-.grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .grid-rows-1 {
@@ -1683,6 +1683,10 @@ select {
 
   .xl\:place-content-start {
     place-content: start;
+  }
+
+  .xl\:place-items-stretch {
+    place-items: stretch;
   }
 
   .xl\:justify-self-end {

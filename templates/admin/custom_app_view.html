@@ -16,14 +16,14 @@
  
 {% block result_list %}
 <p class="text-center text-5xl font-montserrat">Graphe d'utilisation</p>
-<div class="grid grid-cols-3 py-10">
-<div class="max-w-screen-sm">
+<div class="grid xl:grid-cols-3 grid-rows-3 xl:grid-rows-1 py-10 gap-5 xl:place-items-stretch place-items-center w-auto align-center">
+<div class="max-w-screen-sm w-auto">
   <canvas id="myChart"></canvas>
 </div>
-<div class="max-w-screen-sm">
+<div class="max-w-screen-sm w-auto">
   <canvas id="Chart2"></canvas>
 </div>
-<div class="max-w-screen-sm">
+<div class="max-w-screen-sm w-auto">
   <canvas id="Chart3"></canvas>
 </div>
 </div>
@@ -51,6 +51,12 @@
         y: {
           beginAtZero: true
         }
+      },
+      plugins:{
+        title:{
+          display:true,
+          text:"Popularité des articles"
+        }
       }
     }
   });
@@ -72,9 +78,15 @@
         y: {
           beginAtZero: true
         }
+      },
+      plugins:{
+        title:{
+          display:true,
+          text:"Visibilité des articles"
+        }
       }
     }
-  });
+    });
 
   const chart3 = document.getElementById('Chart3');
 
@@ -93,9 +105,15 @@
         y: {
           beginAtZero: true
         }
+      },
+      plugins:{
+        title:{
+          display:true,
+          text:"Rapport nombre de likes par nombre de vues"
+        }
       }
     }
-  });
+    });
 
 </script>
 {% endblock result_list %}
