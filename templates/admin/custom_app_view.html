@@ -21,7 +21,7 @@
   <canvas id="myChart"></canvas>
 </div>
 <div class="max-w-screen-sm">
-  Test
+  <canvas id="Chart2"></canvas>
 </div>
 <div class="max-w-screen-sm">
   Test2
@@ -39,10 +39,10 @@
   new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: {{article|safe}},
       datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
+        label: 'Popularité',
+        data: {{like|safe}},
         borderWidth: 1
       }]
     },
@@ -54,5 +54,27 @@
       }
     }
   });
+
+  const chart2 = document.getElementById('Chart2');
+
+  new Chart(Chart2, {
+    type: 'bar',
+    data: {
+      labels: {{article|safe}},
+      datasets: [{
+        label: '# of Votes',
+        data: {{like|safe}},
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
 </script>
 {% endblock result_list %}

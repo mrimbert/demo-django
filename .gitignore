@@ -5,6 +5,7 @@
 
 # Node artifact files
 theme/node_modules/
+node_modules/
 
 #Uploaded file on Admin Panel
 media/
