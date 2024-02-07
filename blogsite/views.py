@@ -60,10 +60,16 @@ def detail(request, slug):
     
     article = get_object_or_404(Article, slug=slug)
 
+    if article:
+        article.views += 1
+        article.save()
+
     if 'like' in request.POST:
         if request.session.get("has_liked" + slug, False):
+            article.views -= 2
             return redirect("./?successLike=already")
         article.popular += 1
+        article.views -= 2
         article.save()
         request.session["has_liked" + slug] = True
         request.session["has_disliked" + slug] = False
@@ -72,9 +78,11 @@ def detail(request, slug):
     
     if 'dislike' in request.POST:
         if request.session.get("has_disliked" + slug, False):
+            article.views -= 2
             return redirect("./?successLike=already")
         if(article.popular > 0):
             article.popular -= 1
+        article.views -= 2
         article.save()
         request.session["has_liked" + slug] = False
         request.session["has_disliked" + slug] = True
