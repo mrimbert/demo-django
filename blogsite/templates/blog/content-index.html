@@ -46,7 +46,7 @@
         <div class="xl:grid xl:grid-cols-2 grid-rows-2 xl:grid-rows-1 grid-cols-1 place-items-center content-center font-montserrat pt-10 text-center xl:text-left">
             <div class="flex flex-row place-content-center"><img src="{{article.image.url}}" alt="Latest article picture" class="rounded-lg xl:max-w-screen-sm max-w-80 max-h-96 xl:max-h-none object-fill h-96 "></div>
             <div class="xl:pl-20">
-                <span class="flex flex-row gap-5 text-sm text-quaternary xl:place-content-start place-content-center text-center xl:text-left pt-10 xl:pt-0">{%for categorie in categories_last_article%} <span class="font-bold text-lg text-black"> {{categorie}}</span> {%endfor%}{{article.pub_date}}</span>
+                <span class="flex flex-row gap-5 text-sm text-quaternary xl:place-content-start place-content-center text-center xl:text-left pt-10 xl:pt-0">{%for categorie in categories_last_article%} <span class="font-bold text-lg text-black"> {{categorie}}</span> {%endfor%}{{article.pub_date|date:"SHORT_DATE_FORMAT"}}</span>
                 <h2 class="text-3xl font-bold py-10 xl:max-w-screen-sm">{{article.title}}</h2>
                <div class="flex flex-row place-content-center"> <p class="font-caveat pb-10 text-justify xl:pr-20 max-w-screen-sm text-wrap max-w-80 place-self-stretch truncate">{{article.contexte}}</p></div>
                 <a class="text-center my-auto mx-auto w-auto h-full py-2 px-10 bg-blanc border-primary text-secondary font-montserrat rounded-lg inline-block box-border border-2 rounded-x1 hover:bg-primary hover:text-white hover:border-white duration-1000 h-12 font-bold" href="{{article.slug}}/detail">En savoir plus</b></a>
@@ -63,7 +63,7 @@
             <div class="grid grid-rows-2 place-items-center">
                 <div><img src="{{MEDIA_URL}}{{article.image}}" alt="blog image" class="rounded-lg h-96 max-w-80 max-h-96 object-fill"></div>
                 <div class="sm:pt-10 xl:pr-28 xl:pl-28">
-                    <span class="flex flex-row gap-5 text-xs text-quaternary place-items-center">{{article.pub_date}}</span>
+                    <span class="flex flex-row gap-5 text-xs text-quaternary place-items-center">{{article.pub_date|date:"SHORT_DATE_FORMAT"}}</span>
                     <h2 class="text-3xl font-bold py-2 max-w-96 text-sm">{{article.title}}</h2>
                     <p class="font-caveat text-justify pb-5 text-sm self-top place-self-stretch max-w-80 xl:max-w-96 truncate text-wrap">{{article.contexte}}</p>
                     <div><a href="{{article.slug}}/detail" class="text-primary">En savoir plus</a></div>
@@ -82,7 +82,7 @@
             <div class="grid grid-rows-2 place-items-center">
                 <div><img src="{{MEDIA_URL}}{{article.image}}" alt="blog image" class="rounded-lg h-96 max-w-80 max-h-96 object-fill"></div>
                 <div class="pt-10 xl:pr-28 xl:pl-28">
-                    <span class="flex flex-row gap-5 text-xs text-quaternary place-items-center">{{article.pub_date}}</span>
+                    <span class="flex flex-row gap-5 text-xs text-quaternary place-items-center">{{article.pub_date|date:"SHORT_DATE_FORMAT"}}</span>
                     <h2 class="text-3xl font-bold py-2 max-w-96 text-sm">{{article.title}}</h2>
                     <p class="font-caveat text-justify pb-5 text-sm self-top place-self-stretch max-w-80 xl:max-w-96 truncate text-wrap">{{article.contexte}}</p>
                     <div><a href="{{article.slug}}/detail" class="text-primary">En savoir plus</a></div>
