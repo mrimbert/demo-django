@@ -18,14 +18,17 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
+from CustomAdmin.admin import admin_site
 
 handler404 = 'blogsite.views.Erreur404'
 handler400 = 'blogsite.views.Erreur400'
 handler500 = 'blogsite.views.Erreur500'
 
+for model, _ in admin.site._registry.items():
+    admin_site.register(model)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin_site.urls),
     path('', include("blogsite.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
