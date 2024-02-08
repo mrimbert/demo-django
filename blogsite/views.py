@@ -201,16 +201,26 @@ def Erreur500(request):
 def stat(request):
     fichier = open("blogsite/static/blog/data.csv")
     csvreader = csv.reader(fichier)
+    d= []
     rows = []
-    d = []
+
+    if request.GET.get('vue') != None:
+        statType = request.GET.get('vue')
+    else:
+        statType = 0
+
     for row in csvreader:
         rows.append(row)
     for r in rows:
-        d.append([r[3],r[8]])
+        if request.GET.get('vue')=="0" :
+            d.append([r[3],r[8]])
+        else:
+            d.append([r[3],r[6]])
+
     fichier.close()
     del(d[0])
 
-    context={"d":d}
+    context={"d1":d[:25], "d2":d[25:50],"d3":d[50:75],"d4":d[75:], "statType":statType}
 
 
     return render(request, "blog/stat.html",context)

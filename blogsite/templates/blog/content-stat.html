@@ -16,15 +16,25 @@
     <body class="font-montserrat bg-zinc-100">
         {%block header%}
         {%endblock%}
+
+        {{statType}}
         <div class="flex flex-col place-items-center">
         <h1 class="text-2xl py-3 pt-10">Carte de la répartition de la population française</h1>
         <span class="italic pb-10">Plus un département est foncé, plus il est peuplé</span>
+        <div class="flex flex-inline gap-5">
+        <form action="">
+            <button type="submit" name="vue" value="0" class="text-white end-2.5 bottom-2.5 bg-primary hover:bg-blanc hover:text-primary border hover:border-primary transition duration-1000 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-4 py-2 ">Vue population</button>
+        </form>
+        
+        <form action="" class="pb-5">
+            <button type="submit" name="vue" value="1" class="text-white end-2.5 bottom-2.5 bg-primary hover:bg-blanc hover:text-primary border hover:border-primary transition duration-1000 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-4 py-2 ">Vue commune</button>
+        </form>
+    </div>
+
         <div id="container" style="position: relative; width: 900px; height: 900px;"></div>
         </div>
 
-
-
-        <div class="flex flex-col place-items-center pb-10">
+        <div class="flex flex-row place-content-center justify-items-center gap-10 pb-10 items-center w-full">
             <table class="w-auto text-sm text-left rtl:text-right table-auto text-center">
                 <thead class="bg-slate-200">
                     <tr>
@@ -37,7 +47,71 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {%for i in d%}
+                    {%for i in d1%}
+                        <tr>
+                            {%for j in i%}
+                            <td class="border border-slate-600">{{j}}</td>
+                            {%endfor%}
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+
+            <table class="w-auto text-sm text-left rtl:text-right table-auto text-center">
+                <thead class="bg-slate-200">
+                    <tr>
+                        <th class="border border-slate-600">
+                            Département
+                        </th>
+                        <th class="border border-slate-600">
+                            Population (en 2018)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for i in d2%}
+                        <tr>
+                            {%for j in i%}
+                            <td class="border border-slate-600">{{j}}</td>
+                            {%endfor%}
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+            <table class="w-auto text-sm text-left rtl:text-right table-auto text-center">
+                <thead class="bg-slate-200">
+                    <tr>
+                        <th class="border border-slate-600">
+                            Département
+                        </th>
+                        <th class="border border-slate-600">
+                            Population (en 2018)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for i in d3%}
+                        <tr>
+                            {%for j in i%}
+                            <td class="border border-slate-600">{{j}}</td>
+                            {%endfor%}
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+            <table class="w-auto text-sm text-left rtl:text-right table-auto text-center">
+                <thead class="bg-slate-200">
+                    <tr>
+                        <th class="border border-slate-600">
+                            Département
+                        </th>
+                        <th class="border border-slate-600">
+                            Population (en 2018)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for i in d4%}
                         <tr>
                             {%for j in i%}
                             <td class="border border-slate-600">{{j}}</td>
@@ -50,93 +124,90 @@
 
 
 
-
+{%if statType == "0" %}
         <script>
             var countries = Datamap.prototype.fraTopo.objects.fra.geometries;
 			const MyData = {};
 
 			var series = [];
 
-// Créer une promesse pour charger les données CSV
-		function loadCSVData() {
-		return new Promise((resolve, reject) => {
-			d3.csv("{% static 'blog/data.csv' %}", function(data) {
-				resolve(data);
-			});
-		});
-		}
-
-		// Utiliser la promesse pour charger les données CSV et créer dataset
-		loadCSVData().then(data => {
-		// Utiliser les données CSV chargées
-		for (var i = 0, j = countries.length; i < j; i++) {
-			var a = countries[i].id;
-			var b = countries[i].properties.name;
-			var c = 0;
-
-			for (var k = 0; k < data.length; k++) {
-				if (data[k].DEP == b) {
-					c = data[k].PTOT;
-					console.log(c);
-				}
-			}
-
-			series[i] = [a, c];
-		}
-
-		// Créer dataset après que series a été rempli
-		var dataset = {};
-		var onlyValues = series.map(function(obj) { return obj[1]; });
-		var minValue = Math.min.apply(null, onlyValues),
-			maxValue = Math.max.apply(null, onlyValues);
-
-		var paletteScale = d3.scale.linear()
-			.domain([minValue, maxValue])
-			.range(["#f8efff", "#7C4EE4"]);
-
-		series.forEach(function(item) {
-			var iso = item[0],
-				value = item[1];
-			dataset[iso] = { numberOfThings: value, fillColor: paletteScale(value) };
-		});
-		var map = new Datamap({
-                element: document.getElementById('container'),
-                responsive:true,
-                geographyConfig: {
-                    dataUrl: null,
-                    //dataUrl: "../../assets/script/fra.topo.json",
-                    popupOnHover: true,
-                    highlightOnHover: true,
-                    borderColor: '#444',
-                    borderWidth: 0.5,
-                },
-                scope: 'fra',
-                data: dataset,
-                setProjection: function (element) {
-                    var projection = d3.geo.mercator()
-                        .center([3.0, 48.5])
-                        .scale(3500);
-                    var path = d3.geo.path().projection(projection);
-                    return {
-                        path: path,
-                        projection: projection
-                    };
-                },
-                geographyConfig: {
-                popupTemplate: function(geo, data) {
-                return ['<div class="hoverinfo"><strong>',
-                        'Nombre d\'habitants dans le département ' + geo.properties.name,
-                        ': ' + data.numberOfThings,
-                        '</strong></div>'].join('');
+            function loadCSVData() {
+            return new Promise((resolve, reject) => {
+                d3.csv("{% static 'blog/data.csv' %}", function(data) {
+                    resolve(data);
+                });
+            });
             }
-        }
-        });
-        
-        }).catch(error => {
-		// Gérer les erreurs de chargement des données CSV
-		console.error("Erreur lors du chargement des données CSV :", error);
-		});
+
+            loadCSVData().then(data => {
+            for (var i = 0, j = countries.length; i < j; i++) {
+                var a = countries[i].id;
+                var b = countries[i].properties.name;
+                var c = 0;
+
+                for (var k = 0; k < data.length; k++) {
+                    if (data[k].DEP == b) {
+                        c = data[k].PTOT;
+                        console.log(c);
+                    }
+                }
+
+                series[i] = [a, c];
+            }
+
+            var dataset = {};
+            var onlyValues = series.map(function(obj) { return obj[1]; });
+            var minValue = Math.min.apply(null, onlyValues),
+                maxValue = Math.max.apply(null, onlyValues);
+
+            var paletteScale = d3.scale.linear()
+                .domain([minValue, maxValue])
+                .range(["#f8efff", "#7C4EE4"]);
+
+            series.forEach(function(item) {
+                var iso = item[0],
+                    value = item[1];
+                dataset[iso] = { numberOfThings: value, fillColor: paletteScale(value) };
+            });
+            var map = new Datamap({
+                    element: document.getElementById('container'),
+                    responsive:true,
+                    geographyConfig: {
+                        dataUrl: null,
+                        popupOnHover: true,
+                        highlightOnHover: true,
+                        borderColor: '#444',
+                        borderWidth: 0.5,
+                    },
+                    scope: 'fra',
+                    data: dataset,
+                    setProjection: function (element) {
+                        var projection = d3.geo.mercator()
+                            .center([3.0, 48.5])
+                            .scale(3500);
+                        var path = d3.geo.path().projection(projection);
+                        return {
+                            path: path,
+                            projection: projection
+                        };
+                    },
+                    geographyConfig: {
+                    popupTemplate: function(geo, data) {
+                    return ['<div class="hoverinfo"><strong>',
+                            'Nombre d\'habitants dans le département ' + geo.properties.name,
+                            ': ' + data.numberOfThings,
+                            '</strong></div>'].join('');
+                }
+            }
+            });
+            
+            }).catch(error => {
+            console.error("Erreur lors du chargement des données CSV :", error);
+            });
     </script>
+{%endif%}
+
+
         {%block footer%}
         {%endblock%}
     </body>
