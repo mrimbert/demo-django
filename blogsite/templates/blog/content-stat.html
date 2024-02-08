@@ -17,8 +17,39 @@
         {%block header%}
         {%endblock%}
         <div class="flex flex-col place-items-center">
-        <div id="container" style="position: relative; width: 1000px; height: 1000px;"></div>
+        <h1 class="text-2xl py-3 pt-10">Carte de la répartition de la population française</h1>
+        <span class="italic pb-10">Plus un département est foncé, plus il est peuplé</span>
+        <div id="container" style="position: relative; width: 900px; height: 900px;"></div>
         </div>
+
+
+
+        <div class="flex flex-col place-items-center pb-10">
+            <table class="w-auto text-sm text-left rtl:text-right table-auto text-center">
+                <thead class="bg-slate-200">
+                    <tr>
+                        <th class="border border-slate-600">
+                            Département
+                        </th>
+                        <th class="border border-slate-600">
+                            Population (en 2018)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for i in d%}
+                        <tr>
+                            {%for j in i%}
+                            <td class="border border-slate-600">{{j}}</td>
+                            {%endfor%}
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+
+
+
 
         <script>
             var countries = Datamap.prototype.fraTopo.objects.fra.geometries;
@@ -61,7 +92,7 @@
 
 		var paletteScale = d3.scale.linear()
 			.domain([minValue, maxValue])
-			.range(["#EFEFFF", "#02386F"]);
+			.range(["#f8efff", "#7C4EE4"]);
 
 		series.forEach(function(item) {
 			var iso = item[0],
@@ -70,6 +101,7 @@
 		});
 		var map = new Datamap({
                 element: document.getElementById('container'),
+                responsive:true,
                 geographyConfig: {
                     dataUrl: null,
                     //dataUrl: "../../assets/script/fra.topo.json",
@@ -79,25 +111,28 @@
                     borderWidth: 0.5,
                 },
                 scope: 'fra',
-                fills: {
-                    'MAJOR': '#306596',
-                    'MEDIUM': '#0fa0fa',
-                    'MINOR': '#bada55',
-                    defaultFill: '#dddddd'
-                },
                 data: dataset,
                 setProjection: function (element) {
                     var projection = d3.geo.mercator()
-                        .center([2.0, 50.0])
-                        .scale(3000);
+                        .center([3.0, 48.5])
+                        .scale(3500);
                     var path = d3.geo.path().projection(projection);
                     return {
                         path: path,
                         projection: projection
                     };
-                }
-            });
-				}).catch(error => {
+                },
+                geographyConfig: {
+                popupTemplate: function(geo, data) {
+                return ['<div class="hoverinfo"><strong>',
+                        'Nombre d\'habitants dans le département ' + geo.properties.name,
+                        ': ' + data.numberOfThings,
+                        '</strong></div>'].join('');
+            }
+        }
+        });
+        
+        }).catch(error => {
 		// Gérer les erreurs de chargement des données CSV
 		console.error("Erreur lors du chargement des données CSV :", error);
 		});

@@ -1209,6 +1209,11 @@ select {
   border-color: rgb(124 78 228 / var(--tw-border-opacity));
 }
 
+.border-slate-600 {
+  --tw-border-opacity: 1;
+  border-color: rgb(71 85 105 / var(--tw-border-opacity));
+}
+
 .bg-blanc {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -1236,6 +1241,11 @@ select {
 .bg-primary {
   --tw-bg-opacity: 1;
   background-color: rgb(124 78 228 / var(--tw-bg-opacity));
+}
+
+.bg-slate-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
 }
 
 .bg-transparent {
@@ -1401,6 +1411,10 @@ select {
 
 .pt-5 {
   padding-top: 1.25rem;
+}
+
+.text-left {
+  text-align: left;
 }
 
 .text-center {
@@ -1897,6 +1911,10 @@ select {
   .\32xl\:pb-96 {
     padding-bottom: 24rem;
   }
+}
+
+.rtl\:text-right:where([dir="rtl"], [dir="rtl"] *) {
+  text-align: right;
 }
 
 @media (prefers-color-scheme: dark) {

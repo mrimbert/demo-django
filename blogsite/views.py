@@ -3,6 +3,7 @@ from django.views import generic
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.template import RequestContext
 
+import csv
 
 
 from .models import Article, Utilisateur, Contact, Categorie
@@ -198,4 +199,18 @@ def Erreur500(request):
     return render(request, '500.html', status=500)
 
 def stat(request):
-    return render(request, "blog/stat.html")
+    fichier = open("blogsite/static/blog/data.csv")
+    csvreader = csv.reader(fichier)
+    rows = []
+    d = []
+    for row in csvreader:
+        rows.append(row)
+    for r in rows:
+        d.append([r[3],r[8]])
+    fichier.close()
+    del(d[0])
+
+    context={"d":d}
+
+
+    return render(request, "blog/stat.html",context)
