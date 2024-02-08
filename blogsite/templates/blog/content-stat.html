@@ -17,10 +17,9 @@
         {%block header%}
         {%endblock%}
 
-        {{statType}}
         <div class="flex flex-col place-items-center">
-        <h1 class="text-2xl py-3 pt-10">Carte de la répartition de la population française</h1>
-        <span class="italic pb-10">Plus un département est foncé, plus il est peuplé</span>
+        <h1 class="text-2xl py-3 pt-10">{%if statType == "0"%}Carte de la répartition de la population française{%else%} Carte de la répartition des communes françaises{%endif%}</h1>
+        <span class="italic pb-10">Plus un département est foncé, plus il {%if statType == "0"%}est peuplé{%else%}compte de communes{%endif%}</span>
         <div class="flex flex-inline gap-5">
         <form action="">
             <button type="submit" name="vue" value="0" class="text-white end-2.5 bottom-2.5 bg-primary hover:bg-blanc hover:text-primary border hover:border-primary transition duration-1000 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-4 py-2 ">Vue population</button>
@@ -42,7 +41,7 @@
                             Département
                         </th>
                         <th class="border border-slate-600">
-                            Population (en 2018)
+                            {%if statType == "0"%}Population (en 2018){%else%}Nombre de communes{%endif%}
                         </th>
                     </tr>
                 </thead>
@@ -64,7 +63,7 @@
                             Département
                         </th>
                         <th class="border border-slate-600">
-                            Population (en 2018)
+                            {%if statType == "0"%}Population (en 2018){%else%}Nombre de communes{%endif%}
                         </th>
                     </tr>
                 </thead>
@@ -85,7 +84,7 @@
                             Département
                         </th>
                         <th class="border border-slate-600">
-                            Population (en 2018)
+                            {%if statType == "0"%}Population (en 2018){%else%}Nombre de communes{%endif%}
                         </th>
                     </tr>
                 </thead>
@@ -106,7 +105,7 @@
                             Département
                         </th>
                         <th class="border border-slate-600">
-                            Population (en 2018)
+                            {%if statType == "0"%}Population (en 2018){%else%}Nombre de communes{%endif%}
                         </th>
                     </tr>
                 </thead>
@@ -195,6 +194,89 @@
                     popupTemplate: function(geo, data) {
                     return ['<div class="hoverinfo"><strong>',
                             'Nombre d\'habitants dans le département ' + geo.properties.name,
+                            ': ' + data.numberOfThings,
+                            '</strong></div>'].join('');
+                }
+            }
+            });
+            
+            }).catch(error => {
+            console.error("Erreur lors du chargement des données CSV :", error);
+            });
+    </script>
+{%endif%}
+
+{%if statType == "1" %}
+        <script>
+            var countries = Datamap.prototype.fraTopo.objects.fra.geometries;
+			const MyData = {};
+
+			var series = [];
+
+            function loadCSVData() {
+            return new Promise((resolve, reject) => {
+                d3.csv("{% static 'blog/data.csv' %}", function(data) {
+                    resolve(data);
+                });
+            });
+            }
+
+            loadCSVData().then(data => {
+            for (var i = 0, j = countries.length; i < j; i++) {
+                var a = countries[i].id;
+                var b = countries[i].properties.name;
+                var c = 0;
+
+                for (var k = 0; k < data.length; k++) {
+                    if (data[k].DEP == b) {
+                        c = data[k].NBCOM;
+                        console.log(c);
+                    }
+                }
+
+                series[i] = [a, c];
+            }
+
+            var dataset = {};
+            var onlyValues = series.map(function(obj) { return obj[1]; });
+            var minValue = Math.min.apply(null, onlyValues),
+                maxValue = Math.max.apply(null, onlyValues);
+
+            var paletteScale = d3.scale.linear()
+                .domain([minValue, maxValue])
+                .range(["#f8efff", "#7C4EE4"]);
+
+            series.forEach(function(item) {
+                var iso = item[0],
+                    value = item[1];
+                dataset[iso] = { numberOfThings: value, fillColor: paletteScale(value) };
+            });
+            var map = new Datamap({
+                    element: document.getElementById('container'),
+                    responsive:true,
+                    geographyConfig: {
+                        dataUrl: null,
+                        popupOnHover: true,
+                        highlightOnHover: true,
+                        borderColor: '#444',
+                        borderWidth: 0.5,
+                    },
+                    scope: 'fra',
+                    data: dataset,
+                    setProjection: function (element) {
+                        var projection = d3.geo.mercator()
+                            .center([3.0, 48.5])
+                            .scale(3500);
+                        var path = d3.geo.path().projection(projection);
+                        return {
+                            path: path,
+                            projection: projection
+                        };
+                    },
+                    geographyConfig: {
+                    popupTemplate: function(geo, data) {
+                    return ['<div class="hoverinfo"><strong>',
+                            'Nombre de commune dans le département ' + geo.properties.name,
                             ': ' + data.numberOfThings,
                             '</strong></div>'].join('');
                 }
