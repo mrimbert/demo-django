@@ -199,6 +199,20 @@ def Erreur500(request):
     return render(request, '500.html', status=500)
 
 def stat(request):
+    successForm = request.GET.get('successForm',False)
+
+    if request.method=="POST":
+        form = MailForm(request.POST)
+        if form.is_valid():
+            email = request.POST.get("mail")
+            user = Utilisateur(mail=email)
+            user.save()
+
+            return redirect("./?successForm=True")
+
+    else : 
+        form = MailForm()
+    
     fichier = open("blogsite/static/blog/data.csv")
     csvreader = csv.reader(fichier)
     d= []
@@ -220,7 +234,7 @@ def stat(request):
     fichier.close()
     del(d[0])
 
-    context={"d1":d[:25], "d2":d[25:50],"d3":d[50:75],"d4":d[75:], "statType":statType}
+    context={"d1":d[:25], "d2":d[25:50],"d3":d[50:75],"d4":d[75:], "statType":statType, "form":form, "successForm":successForm}
 
 
     return render(request, "blog/stat.html",context)
