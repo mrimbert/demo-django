@@ -207,7 +207,7 @@ def stat(request):
     if request.GET.get('vue') != None:
         statType = request.GET.get('vue')
     else:
-        statType = 0
+        statType = "0"
 
     for row in csvreader:
         rows.append(row)
