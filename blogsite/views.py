@@ -5,7 +5,7 @@ from django.template import RequestContext
 
 
 
-from .models import Article, Utilisateur, Contact
+from .models import Article, Utilisateur, Contact, Categorie
 from .forms import MailForm, ContactForm
 
 
@@ -19,6 +19,13 @@ def index(request):
 
     featured_article = Article.objects.filter(featured = 1).values()
     popular_article = Article.objects.order_by("-popular")[:6]
+    categoriesID = list(Article.objects.values_list("categories"))
+    categories = []
+
+    for i in range(len(categoriesID)):
+        a = list(Categorie.objects.raw("SELECT id,title FROM blogsite_categorie WHERE id ="+str(categoriesID[i][0])))
+        categories.append(a)
+
 
     successForm = request.GET.get('successForm',False)
 
@@ -35,7 +42,7 @@ def index(request):
     else : 
         form = MailForm()
 
-    context = {"latest_article" : latest_article, "featured_article": featured_article, "popular_article": popular_article, "last_article":last_article, "categories_last_article":categories_last_article,"form":form, "successForm":successForm}
+    context = {"latest_article" : latest_article, "featured_article": featured_article, "popular_article": popular_article, "last_article":last_article, "categories_last_article":categories_last_article,"form":form, "successForm":successForm, "categories":categories}
 
 
     return render(request, "blog/index.html", context)
@@ -189,3 +196,6 @@ def Erreur400(request, exception):
 
 def Erreur500(request):
     return render(request, '500.html', status=500)
+
+def stat(request):
+    return render(request, "blog/stat.html")

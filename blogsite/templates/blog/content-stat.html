@@ -1,0 +1,110 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{article.title}}</title>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+        <script src="{% static 'blog/datamaps.fra.js' %}"></script>
+        {% tailwind_css %}
+    </head>
+
+    <body class="font-montserrat bg-zinc-100">
+        {%block header%}
+        {%endblock%}
+        <div class="flex flex-col place-items-center">
+        <div id="container" style="position: relative; width: 1000px; height: 1000px;"></div>
+        </div>
+
+        <script>
+            var countries = Datamap.prototype.fraTopo.objects.fra.geometries;
+			const MyData = {};
+
+			var series = [];
+
+// Créer une promesse pour charger les données CSV
+		function loadCSVData() {
+		return new Promise((resolve, reject) => {
+			d3.csv("{% static 'blog/data.csv' %}", function(data) {
+				resolve(data);
+			});
+		});
+		}
+
+		// Utiliser la promesse pour charger les données CSV et créer dataset
+		loadCSVData().then(data => {
+		// Utiliser les données CSV chargées
+		for (var i = 0, j = countries.length; i < j; i++) {
+			var a = countries[i].id;
+			var b = countries[i].properties.name;
+			var c = 0;
+
+			for (var k = 0; k < data.length; k++) {
+				if (data[k].DEP == b) {
+					c = data[k].PTOT;
+					console.log(c);
+				}
+			}
+
+			series[i] = [a, c];
+		}
+
+		// Créer dataset après que series a été rempli
+		var dataset = {};
+		var onlyValues = series.map(function(obj) { return obj[1]; });
+		var minValue = Math.min.apply(null, onlyValues),
+			maxValue = Math.max.apply(null, onlyValues);
+
+		var paletteScale = d3.scale.linear()
+			.domain([minValue, maxValue])
+			.range(["#EFEFFF", "#02386F"]);
+
+		series.forEach(function(item) {
+			var iso = item[0],
+				value = item[1];
+			dataset[iso] = { numberOfThings: value, fillColor: paletteScale(value) };
+		});
+		var map = new Datamap({
+                element: document.getElementById('container'),
+                geographyConfig: {
+                    dataUrl: null,
+                    //dataUrl: "../../assets/script/fra.topo.json",
+                    popupOnHover: true,
+                    highlightOnHover: true,
+                    borderColor: '#444',
+                    borderWidth: 0.5,
+                },
+                scope: 'fra',
+                fills: {
+                    'MAJOR': '#306596',
+                    'MEDIUM': '#0fa0fa',
+                    'MINOR': '#bada55',
+                    defaultFill: '#dddddd'
+                },
+                data: dataset,
+                setProjection: function (element) {
+                    var projection = d3.geo.mercator()
+                        .center([2.0, 50.0])
+                        .scale(3000);
+                    var path = d3.geo.path().projection(projection);
+                    return {
+                        path: path,
+                        projection: projection
+                    };
+                }
+            });
+				}).catch(error => {
+		// Gérer les erreurs de chargement des données CSV
+		console.error("Erreur lors du chargement des données CSV :", error);
+		});
+    </script>
+        {%block footer%}
+        {%endblock%}
+    </body>
+
+
+</html>

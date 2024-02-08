@@ -1,0 +1,69 @@
+{%extends "blog/content-stat.html" %}
+{% load widget_tweaks %}
+
+{%block header%}
+<header>
+    <div class="shadow-lg shadow-gris-900 grid xl:grid-cols-3 bg-blanc xl:h-32 top-0 left-0 right-0 place-items-center text-center">
+        <div class="w-40 mt-8 justify-self-center">
+            <a class="text-xl tracking-wide text-center" href="../../">Test Django</a>
+        </div>
+        <div class="xl:grid xl:grid-rows-2 xl:pt-16 xl:justify-self-end justify-self-center pt-4 place-items-center">
+            <div class="align-middle">
+                <a href="../article/" class="font-montserrat text-black text-xl tracking-wide px-5 hover:text-primary transition duration-300">Blog</a>
+                <a href="../about/" class="font-montserrat text-black text-xl tracking-wide xl:mx-10 px-5 hover:text-primary transition duration-300">A propos</a>
+            </div>
+        </div>
+        <div class="xl:pt-14 justify-self-center align-middle py-5">
+            <a class="w-auto text-center my-auto mx-auto w-auto py-2 px-10 bg-blanc border-primary text-primary font-montserrat rounded-lg inline-block box-border border-2 rounded-x1 hover:bg-primary hover:text-white hover:border-white duration-1000 h-12 font-bold " href="../contact/">Contactez nous</a>
+        </div>
+        </div>
+</header>
+
+{%if successForm%}
+            <div class="pt-10">
+            <div class="p-4 mb-4 text-sm rounded-lg bg-green-200 text-center" role="alert">
+             <span class="font-medium">Succès !</span> Le formulaire a bien été envoyé
+            </div>
+{%endif%}
+
+{%if successLike and successLike != 'already'%}
+            <div class="pt-10">
+            <div class="p-4 mb-4 text-sm rounded-lg bg-green-200 text-center" role="alert">
+             <span class="font-medium">Succès !</span> Votre "like" a bien été pris en compte
+            </div>
+{%endif%}
+
+{%if successLike == 'already'%}
+            <div class="pt-10">
+            <div class="p-4 mb-4 text-sm rounded-lg bg-orange-200 text-center" role="alert">
+             <span class="font-medium">Erreur </span> Tu as déjà liké cette article !
+            </div>
+{%endif%}
+
+{%endblock header%}
+
+
+
+{%block footer%}
+<footer>
+    <div class="text-center bg-gradient-to-r from-violet-700 to-violet-600 text-blanc font-montserrat py-10">
+        <h1 class="text-5xl font-bold py-10">S'inscrire à la newsletter</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="pb-5">
+                {%render_field form.mail class="text-tertiary w-auto xl:w-96 rounded-lg focus:ring-2 focus:ring-slate-200 focus:border-slate-200 object-fit text-wrap"%}
+            </div>
+            <input type="submit" value="Soumettre" class="w-auto px-20 bg-inherit border-blanc text-blanc font-montserrat rounded-lg inline-block box-border border-2 rounded-x1 hover:bg-blanc hover:text-primary duration-1000 h-12 font-bold">
+        </form>
+    </div>
+    <div class="text-center bg-blanc font-montserrat py-10">
+        <h1 class="font-bold text-3xl">Site Test</h1>
+        <div class="flex flex-row text-center pt-10 justify-center gap-5">
+            <a href="../" class="hover:text-primary transition duration-300">Accueil</a>
+            <a href="../article/" class="hover:text-primary transition duration-300">Blog</a>
+            <a href="../about/" class="hover:text-primary transition duration-300">A propos</a>
+            <a href="../contact/" class="hover:text-primary transition duration-300">Nous contacter</a>
+        </div>
+    </div>
+</footer>
+{%endblock%}
