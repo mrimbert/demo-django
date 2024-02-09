@@ -23,7 +23,7 @@
 
         {{test}}
 
-        <div class="flex flex-col place-items-center">
+        <div class="hidden 2xl:flex flex-col place-items-center">
         <h1 class="text-2xl py-3 pt-10">{%if statType == "0"%}Carte de la répartition de la population française{%else%} Carte de la répartition des communes françaises{%endif%}</h1>
         <span class="italic pb-10">Plus un département est foncé, plus il {%if statType == "0"%}est peuplé{%else%}compte de communes{%endif%}</span>
         <div class="flex flex-inline gap-5">
@@ -36,11 +36,11 @@
         </form>
     </div>
 
-        <div id="container" style="position: relative; width: 900px; height: 900px;"></div>
+        <div id="container" style="position: relative; width: 50%; height: 50%;"></div>
         </div>
 
-        <div class="flex flex-col xl:flex-row place-content-center justify-items-center gap-10 pb-10 items-center w-full">
-            <table class="w-auto text-sm text-left rtl:text-right table-auto text-center">
+        <div class="flex flex-col xl:flex-row place-content-center justify-items-center gap-10 pb-10 2xl:py-0 py-10 items-center w-full px-10">
+            <table class="w-full text-sm text-left rtl:text-right table-auto text-center">
                 <thead class="bg-slate-200">
                     <tr>
                         <th class="border border-slate-600">
@@ -62,7 +62,7 @@
                 </tbody>
             </table>
 
-            <table class="w-auto text-sm text-left rtl:text-right table-auto text-center">
+            <table class="w-full text-sm text-left rtl:text-right table-auto text-center">
                 <thead class="bg-slate-200">
                     <tr>
                         <th class="border border-slate-600">
@@ -83,7 +83,7 @@
                     {%endfor%}
                 </tbody>
             </table>
-            <table class="w-auto text-sm text-left rtl:text-right table-auto text-center">
+            <table class="w-full text-sm text-left rtl:text-right table-auto text-center">
                 <thead class="bg-slate-200">
                     <tr>
                         <th class="border border-slate-600">
@@ -104,7 +104,7 @@
                     {%endfor%}
                 </tbody>
             </table>
-            <table class="w-auto text-sm text-left rtl:text-right table-auto text-center">
+            <table class="w-full text-sm text-left rtl:text-right table-auto text-center">
                 <thead class="bg-slate-200">
                     <tr>
                         <th class="border border-slate-600">
@@ -310,6 +310,10 @@
 {%endif%}
 
 <script>
+    window.addEventListener('resize', function() {
+        map.resize();
+    });
+
     function removeData(chart) {
     chart.data.labels.pop();
     chart.data.datasets.forEach((dataset) => {

@@ -244,7 +244,7 @@ def stat(request):
     for row in csvreader:
         rows.append(row)
     for r in rows:
-        if request.GET.get('vue')=="0" :
+        if statType=="0" :
             d.append([r[3],r[8]])
         else:
             d.append([r[3],r[6]])
