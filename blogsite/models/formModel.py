@@ -20,3 +20,5 @@ class Test(models.Model):
 class StatUser(models.Model):
     date_debut = models.CharField(max_length=100)
     date_fin = models.CharField(max_length=100)
+    int_debut = models.IntegerField()
+    int_fin = models.IntegerField()

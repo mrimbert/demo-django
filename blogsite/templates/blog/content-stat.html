@@ -132,9 +132,9 @@
             <div class="max-w-screen-lg">
 
             <div>
-                <label id="output-range" class="block mb-2 text-sm font-medium text-gray-900">Sélectionner une plage de donnée :</label>
-                <input id="steps-range" type="range" min="0" max="360" value="1" step="1" class="w-full h-2 bg-purple-200 rounded-lg appearance-none cursor-pointer">
-                <input id="steps-range-debut" type="range" min="0" max="360" value="1" step="1" class="w-full h-2 bg-purple-200 rounded-lg appearance-none cursor-pointer">
+                <label id="output-range" class="block mb-2 text-sm font-medium text-gray-900">Donnée sélectionnée de {{date_debut}} jusqu'à {{date_fin}}</label>
+                <input id="steps-range" type="range" min="0" max="360" value="{{int_fin}}" step="1" class="w-full h-2 bg-purple-200 rounded-lg appearance-none cursor-pointer">
+                <input id="steps-range-debut" type="range" min="0" max="360" value="{{int_debut}}" step="1" class="w-full h-2 bg-purple-200 rounded-lg appearance-none cursor-pointer">
             </div>
             
             </div>
@@ -385,12 +385,16 @@
         }
 
         function send_data(){
+            var val_fin = document.getElementById("steps-range").value
+            var val_debut_r = document.getElementById("steps-range-debut").value
             $.ajax({
                 url: "{%url 'blogsite:stat'%}",
                 data:{
                     'csrfmiddlewaretoken':'{{csrf_token}}',
                     'valeur_debut':data_x[0],
-                    'valeur_fin':data_x[data_x.length-1]
+                    'valeur_fin':data_x[data_x.length-1],
+                    'int_debut':val_debut_r,
+                    'int_fin':val_fin
                 },
                 method:'POST'
             })

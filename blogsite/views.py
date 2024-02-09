@@ -253,26 +253,32 @@ def stat(request):
     del(d[0])
     valeur_debut = request.POST.get("valeur_debut",0)
     valeur_fin = request.POST.get("valeur_fin",0)
+    int_debut = request.POST.get("int_debut",1)
+    int_fin = request.POST.get("int_fin",1)
 
     if (valeur_debut==0 and valeur_fin==0 and request.session.get("stat", False)):
         info = StatUser.objects.get(id = request.session["statid"])
         valeur_debut= info.date_debut
         valeur_fin = info.date_fin
+        int_debut = info.int_debut
+        int_fin = info.int_fin
 
     if request.session.get("stat", False):
         info = StatUser.objects.get(id = request.session["statid"])
         info.date_debut = valeur_debut
         info.date_fin = valeur_fin
+        info.int_fin = int_fin
+        info.int_debut = int_debut
         info.save()
     else:
-        info = StatUser(date_debut=valeur_debut, date_fin = valeur_fin)
+        info = StatUser(date_debut=valeur_debut, date_fin = valeur_fin, int_debut = int_debut, int_fin = int_fin)
         info.save()
         #test = list(StatUser.objects.values('id'))[-1]["id"]
         request.session["statid"] = list(StatUser.objects.values('id'))[-1]["id"]
         request.session["stat"] = True
     
 
-    context={"d1":d[:25], "d2":d[25:50],"d3":d[50:75],"d4":d[75:], "statType":statType, "form":form, "successForm":successForm, "x_naissance":json.dumps(x_naissance), "y_naissance":json.dumps(y_naissance), "valeur_debut":valeur_debut, "valeur_fin":valeur_fin}
+    context={"d1":d[:25], "d2":d[25:50],"d3":d[50:75],"d4":d[75:], "statType":statType, "form":form, "successForm":successForm, "x_naissance":json.dumps(x_naissance), "y_naissance":json.dumps(y_naissance), "int_debut":int_debut, "int_fin":int_fin, "date_debut":valeur_debut, "date_fin":valeur_fin}
 
 
     return render(request, "blog/stat.html",context)
