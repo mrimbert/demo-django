@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from .views import custom_app_view
-from blogsite.models import Article, Categorie, Utilisateur, Contenu, Contact, Test
+from blogsite.models import Article, Categorie, Utilisateur, Contenu, Contact, Test, StatUser
 from django.shortcuts import render
  
 class CustomAppAdmin(admin.AdminSite):
@@ -36,5 +36,8 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ["title"]
     prepopulated_fields = {"slug":("title",)}
 
+class StatUserAdmin(admin.ModelAdmin):
+    list_display = ["date_debut","date_fin"]
 
+admin_site.register(StatUser,StatUserAdmin)
 admin_site.register(Article, ArticleAdmin)

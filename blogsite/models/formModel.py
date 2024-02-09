@@ -16,3 +16,7 @@ class Contact(models.Model):
 
 class Test(models.Model):
     upload = models.FileField(upload_to="blogsite/static/blog/images ")
+
+class StatUser(models.Model):
+    date_debut = models.CharField(max_length=100)
+    date_fin = models.CharField(max_length=100)

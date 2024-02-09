@@ -11,12 +11,17 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
         <script src="{% static 'blog/datamaps.fra.js' %}"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <link rel="stylesheet" href="{% static 'blog/style.css' %}">
         {% tailwind_css %}
     </head>
 
     <body class="font-montserrat bg-zinc-100">
         {%block header%}
         {%endblock%}
+
+        {{test}}
 
         <div class="flex flex-col place-items-center">
         <h1 class="text-2xl py-3 pt-10">{%if statType == "0"%}Carte de la répartition de la population française{%else%} Carte de la répartition des communes françaises{%endif%}</h1>
@@ -344,9 +349,11 @@
   var val = document.getElementById("steps-range").value
         document.getElementById("steps-range").oninput = function(){
             update()
+            send_data()
         }
         document.getElementById("steps-range-debut").oninput=function(){
             update()
+            send_data()
         }
 
         function update(){
@@ -375,6 +382,18 @@
         val.innerHTML = "Donnée sélectionnée de " + data_x[0] +" jusqu'à " + data_x[data_x.length-1]
         chart.data.labels = data_x
         chart.update()
+        }
+
+        function send_data(){
+            $.ajax({
+                url: "{%url 'blogsite:stat'%}",
+                data:{
+                    'csrfmiddlewaretoken':'{{csrf_token}}',
+                    'valeur_debut':data_x[0],
+                    'valeur_fin':data_x[data_x.length-1]
+                },
+                method:'POST'
+            })
         }
 
 </script>
