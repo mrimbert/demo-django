@@ -28,6 +28,15 @@
 </div>
 </div>
 
+<div class="grid xl:grid-cols-2 grid-rows-2 xl:grid-rows-1 py-10 gap-5 xl:place-items-stretch place-items-center w-auto align-center">
+  <div class="max-w-screen-sm w-auto">
+    <canvas id="Chart4"></canvas>
+  </div>
+  <div class="max-w-screen-sm w-auto">
+    <canvas id="Chart5"></canvas>
+  </div>
+  </div>
+
 <p class="text-center text-5xl font-montserrat py-10">Statistiques d'utilisation</p>
 
 <div class="flex flex-col place-items-center">
@@ -139,6 +148,63 @@
         title:{
           display:true,
           text:"Rapport nombre de likes par nombre de vues"
+        }
+      }
+    }
+    });
+
+    const chart4 = document.getElementById('Chart4');
+
+  new Chart(Chart4, {
+    type: 'bar',
+    data: {
+      labels: {{date_debut|safe}},
+      datasets: [{
+        label: 'Nombre d\'utilisation',
+        data: {{date_debut_L|safe}},
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 1
+        }
+      },
+      plugins:{
+        title:{
+          display:true,
+          text:"Nombre d'utilisation de cette date de début (par défaut celle non-présente non pas été sélectionnée)"
+        }
+      }
+    }
+    });
+
+
+    const chart5 = document.getElementById('Chart5');
+
+    new Chart(chart5, {
+    type: 'bar',
+    data: {
+      labels: {{date_fin|safe}},
+      datasets: [{
+        label: 'Nombre d\'utilisation',
+        data: {{date_fin_L|safe}},
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 1
+        }
+      },
+      plugins:{
+        title:{
+          display:true,
+          text:"Nombre d'utilisation de cette date de fin (par défaut celle non-présente non pas été sélectionnée)"
         }
       }
     }

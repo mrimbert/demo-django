@@ -272,7 +272,7 @@ def stat(request):
         request.session["stat"] = True
     
 
-    context={"d1":d[:25], "d2":d[25:50],"d3":d[50:75],"d4":d[75:], "statType":statType, "form":form, "successForm":successForm, "x_naissance":json.dumps(x_naissance), "y_naissance":json.dumps(y_naissance)}
+    context={"d1":d[:25], "d2":d[25:50],"d3":d[50:75],"d4":d[75:], "statType":statType, "form":form, "successForm":successForm, "x_naissance":json.dumps(x_naissance), "y_naissance":json.dumps(y_naissance), "valeur_debut":valeur_debut, "valeur_fin":valeur_fin}
 
 
     return render(request, "blog/stat.html",context)
