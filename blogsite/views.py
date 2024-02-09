@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.template import RequestContext
 
 import csv
+import json
 
 
 from .models import Article, Utilisateur, Contact, Categorie
@@ -201,6 +202,23 @@ def Erreur500(request):
 def stat(request):
     successForm = request.GET.get('successForm',False)
 
+    fichier_naissance = open("blogsite/static/blog/naissance_data.csv")
+    csvreader_naissance = csv.reader(fichier_naissance)
+    y_naissance= []
+    x_naissance = []
+    rows_naissance = []
+
+    for row in csvreader_naissance:
+        rows_naissance.append(row)
+    for r in rows_naissance:
+        x_naissance.append(r[0])
+        y_naissance.append(r[1])
+        
+
+    fichier_naissance.close()
+    del(x_naissance[0])
+    del(y_naissance[0])
+
     if request.method=="POST":
         form = MailForm(request.POST)
         if form.is_valid():
@@ -234,7 +252,7 @@ def stat(request):
     fichier.close()
     del(d[0])
 
-    context={"d1":d[:25], "d2":d[25:50],"d3":d[50:75],"d4":d[75:], "statType":statType, "form":form, "successForm":successForm}
+    context={"d1":d[:25], "d2":d[25:50],"d3":d[50:75],"d4":d[75:], "statType":statType, "form":form, "successForm":successForm, "x_naissance":json.dumps(x_naissance), "y_naissance":json.dumps(y_naissance)}
 
 
     return render(request, "blog/stat.html",context)

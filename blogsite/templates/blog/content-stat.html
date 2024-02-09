@@ -10,6 +10,7 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
         <script src="{% static 'blog/datamaps.fra.js' %}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         {% tailwind_css %}
     </head>
 
@@ -33,7 +34,7 @@
         <div id="container" style="position: relative; width: 900px; height: 900px;"></div>
         </div>
 
-        <div class="flex flex-row place-content-center justify-items-center gap-10 pb-10 items-center w-full">
+        <div class="flex flex-col xl:flex-row place-content-center justify-items-center gap-10 pb-10 items-center w-full">
             <table class="w-auto text-sm text-left rtl:text-right table-auto text-center">
                 <thead class="bg-slate-200">
                     <tr>
@@ -121,6 +122,17 @@
             </table>
         </div>
 
+        <div class="flex flex-col place-content-center justify-items-center gap-10 pb-10 items-center w-full">
+            <h1 class="text-2xl py-3 pt-10">Graphe des naissance en France depuis 1994 (Mayotte a été ajouté en 2014)</h1>
+            <div class="max-w-screen-lg">
+            <label id="output" class="block mb-2 text-sm font-medium text-gray-900"></label>
+            <input id="steps-range" type="range" min="0" max="365" value="1" step="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" oninput=sliderChange>
+            </div>
+            <div class="w-full max-w-screen-lg">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+
 
 
 {%if statType == "0" %}
@@ -147,7 +159,6 @@
                 for (var k = 0; k < data.length; k++) {
                     if (data[k].DEP == b) {
                         c = data[k].PTOT;
-                        console.log(c);
                     }
                 }
 
@@ -230,7 +241,6 @@
                 for (var k = 0; k < data.length; k++) {
                     if (data[k].DEP == b) {
                         c = data[k].NBCOM;
-                        console.log(c);
                     }
                 }
 
@@ -288,6 +298,67 @@
             });
     </script>
 {%endif%}
+
+<script>
+    function removeData(chart) {
+    chart.data.labels.pop();
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.pop();
+    });
+    chart.update();
+}
+
+        let data_get_x = {{x_naissance|safe}};
+        let data_get_y = {{y_naissance|safe}};
+        let data_x = data_get_x
+        let data_y = data_get_y    
+
+
+        const ctx = document.getElementById('myChart');
+     chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: data_x,
+      datasets: [{
+        label: 'Nombre de naissance',
+        data: data_y,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+      pointStyle: false
+    }
+  });
+
+  var val = document.getElementById("steps-range").value
+        document.getElementById("steps-range").oninput = function(){
+            data_x = []
+            data_y = []
+           var val = document.getElementById("steps-range").value
+           console.log(val)
+
+           for (var i = 0, j = val; i < j; i++) {
+            data_x[i] = data_get_x[i]
+            data_y[i] = data_get_y[i]
+        }
+        chart.data.datasets = [{
+            label: 'Nombre de naissance',
+            data: data_y,
+            borderWidth: 1
+        }]
+        console.log(chart.data.labels)
+        chart.data.labels = data_x
+        console.log(chart.data.labels)
+        chart.update()
+
+        }
+
+</script>
 
 
         {%block footer%}
