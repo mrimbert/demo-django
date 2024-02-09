@@ -123,10 +123,15 @@
         </div>
 
         <div class="flex flex-col place-content-center justify-items-center gap-10 pb-10 items-center w-full">
-            <h1 class="text-2xl py-3 pt-10">Graphe des naissance en France depuis 1994 (Mayotte a été ajouté en 2014)</h1>
+            <h1 class="text-2xl py-3 pt-10">Graphe des naissances mensuels en France depuis 1994</h1>
             <div class="max-w-screen-lg">
-            <label id="output" class="block mb-2 text-sm font-medium text-gray-900"></label>
-            <input id="steps-range" type="range" min="0" max="365" value="1" step="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" oninput=sliderChange>
+
+            <div>
+                <label id="output-range" class="block mb-2 text-sm font-medium text-gray-900">Sélectionner une plage de donnée :</label>
+                <input id="steps-range" type="range" min="0" max="360" value="1" step="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                <input id="steps-range-debut" type="range" min="0" max="360" value="1" step="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+            </div>
+            
             </div>
             <div class="w-full max-w-screen-lg">
                 <canvas id="myChart"></canvas>
@@ -322,7 +327,8 @@
       datasets: [{
         label: 'Nombre de naissance',
         data: data_y,
-        borderWidth: 1
+        borderWidth: 1,
+        borderColor: "#7C4EE4"
       }]
     },
     options: {
@@ -331,31 +337,44 @@
           beginAtZero: true
         }
       },
-      pointStyle: false
-    }
+      pointStyle: false,
+    },
   });
 
   var val = document.getElementById("steps-range").value
         document.getElementById("steps-range").oninput = function(){
-            data_x = []
-            data_y = []
+            update()
+        }
+        document.getElementById("steps-range-debut").oninput=function(){
+            update()
+        }
+
+        function update(){
            var val = document.getElementById("steps-range").value
-           console.log(val)
+           var val_debut = document.getElementById("steps-range-debut").value
+           data_x = []
+           data_y = []
+
 
            for (var i = 0, j = val; i < j; i++) {
             data_x[i] = data_get_x[i]
             data_y[i] = data_get_y[i]
         }
+            for(var i=0, j= val_debut;i<j;i++){
+                data_x.shift()
+                data_y.shift()
+            }
+        
         chart.data.datasets = [{
             label: 'Nombre de naissance',
             data: data_y,
-            borderWidth: 1
+            borderWidth: 1,
+            borderColor: "#7C4EE4"
         }]
-        console.log(chart.data.labels)
+        val = document.getElementById("output-range")
+        val.innerHTML = "Donnée sélectionnée de " + data_x[0] +" jusqu'à " + data_x[data_x.length-1]
         chart.data.labels = data_x
-        console.log(chart.data.labels)
         chart.update()
-
         }
 
 </script>
