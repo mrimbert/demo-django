@@ -237,17 +237,12 @@ def stat(request):
     d= []
     rows = []
 
-    
-    statType = request.POST.get('type',0)
-    print(statType)
 
     for row in csvreader:
         rows.append(row)
     for r in rows:
-        if statType==0 :
             d.append([r[3],r[8]])
-        else:
-            d.append([r[3],r[6]])
+
 
     fichier.close()
     del(d[0])
@@ -273,11 +268,10 @@ def stat(request):
     else:
         info = StatUser(date_debut=valeur_debut, date_fin = valeur_fin, int_debut = int_debut, int_fin = int_fin)
         info.save()
-        #test = list(StatUser.objects.values('id'))[-1]["id"]
         request.session["statid"] = list(StatUser.objects.values('id'))[-1]["id"]
         request.session["stat"] = True
 
-    context={"d1":d[:25], "d2":d[25:50],"d3":d[50:75],"d4":d[75:], "statType":statType, "form":form, "successForm":successForm, "x_naissance":json.dumps(x_naissance), "y_naissance":json.dumps(y_naissance), "int_debut":int_debut, "int_fin":int_fin, "date_debut":valeur_debut, "date_fin":valeur_fin}
+    context={"d1":d[:25], "d2":d[25:50],"d3":d[50:75],"d4":d[75:], "form":form, "successForm":successForm, "x_naissance":json.dumps(x_naissance), "y_naissance":json.dumps(y_naissance), "int_debut":int_debut, "int_fin":int_fin, "date_debut":valeur_debut, "date_fin":valeur_fin}
       
     return render(request, "blog/stat.html",context)
 
