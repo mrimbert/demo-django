@@ -1,0 +1,87 @@
+<div class="flex flex-col xl:flex-row place-content-center justify-items-center gap-10 pb-10 2xl:py-0 py-10 items-center w-full px-10">
+    <table class="w-full text-sm text-left rtl:text-right table-auto text-center">
+        <thead class="bg-slate-200">
+            <tr>
+                <th class="border border-slate-600">
+                    Département
+                </th>
+                <th class="border border-slate-600">
+                    Population (en 2018)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for i in d1%}
+                <tr>
+                    {%for j in i%}
+                    <td class="border border-slate-600">{{j}}</td>
+                    {%endfor%}
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+
+    <table class="w-full text-sm text-left rtl:text-right table-auto text-center">
+        <thead class="bg-slate-200">
+            <tr>
+                <th class="border border-slate-600">
+                    Département
+                </th>
+                <th class="border border-slate-600">
+                    Population (en 2018)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for i in d2%}
+                <tr>
+                    {%for j in i%}
+                    <td class="border border-slate-600">{{j}}</td>
+                    {%endfor%}
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+    <table class="w-full text-sm text-left rtl:text-right table-auto text-center">
+        <thead class="bg-slate-200">
+            <tr>
+                <th class="border border-slate-600">
+                    Département
+                </th>
+                <th class="border border-slate-600">
+                    Population (en 2018)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for i in d3%}
+                <tr>
+                    {%for j in i%}
+                    <td class="border border-slate-600">{{j}}</td>
+                    {%endfor%}
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+    <table class="w-full text-sm text-left rtl:text-right table-auto text-center">
+        <thead class="bg-slate-200">
+            <tr>
+                <th class="border border-slate-600">
+                    Département
+                </th>
+                <th class="border border-slate-600">
+                    Population (en 2018)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for i in d4%}
+                <tr>
+                    {%for j in i%}
+                    <td class="border border-slate-600">{{j}}</td>
+                    {%endfor%}
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>

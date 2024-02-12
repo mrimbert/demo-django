@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.template import RequestContext
+from django.template.loader import get_template
 
 import csv
 import json
@@ -243,7 +244,7 @@ def stat(request):
     for row in csvreader:
         rows.append(row)
     for r in rows:
-        if statType=="0" :
+        if statType==0 :
             d.append([r[3],r[8]])
         else:
             d.append([r[3],r[6]])
@@ -275,9 +276,44 @@ def stat(request):
         #test = list(StatUser.objects.values('id'))[-1]["id"]
         request.session["statid"] = list(StatUser.objects.values('id'))[-1]["id"]
         request.session["stat"] = True
-    
 
     context={"d1":d[:25], "d2":d[25:50],"d3":d[50:75],"d4":d[75:], "statType":statType, "form":form, "successForm":successForm, "x_naissance":json.dumps(x_naissance), "y_naissance":json.dumps(y_naissance), "int_debut":int_debut, "int_fin":int_fin, "date_debut":valeur_debut, "date_fin":valeur_fin}
-
-
+      
     return render(request, "blog/stat.html",context)
+
+def com(request):
+    fichier = open("blogsite/static/blog/data.csv")
+    csvreader = csv.reader(fichier)
+    d= []
+    rows = []
+
+    for row in csvreader:
+        rows.append(row)
+    for r in rows:
+            d.append([r[3],r[6]])
+
+    fichier.close()
+    del(d[0])
+
+    context={"d1":d[:25], "d2":d[25:50],"d3":d[50:75],"d4":d[75:]}
+
+
+    return render(request,"blog/tab-stat/com.html",context)
+
+def pop(request):
+    fichier = open("blogsite/static/blog/data.csv")
+    csvreader = csv.reader(fichier)
+    d= []
+    rows = []
+
+    for row in csvreader:
+        rows.append(row)
+    for r in rows:
+            d.append([r[3],r[8]])
+    fichier.close()
+    del(d[0])
+
+    context={"d1":d[:25], "d2":d[25:50],"d3":d[50:75],"d4":d[75:]}
+
+
+    return render(request,"blog/tab-stat/pop.html",context)

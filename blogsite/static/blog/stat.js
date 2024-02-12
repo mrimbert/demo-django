@@ -175,6 +175,7 @@ function mapCreate(type) {
                 method:'POST'
             })
         }
+        tab = document.getElementById("tab")
 
         bouton_com = document.getElementById("bt-com")
         bouton_com.addEventListener("click",(event) => {
@@ -197,14 +198,30 @@ function mapCreate(type) {
         function send_data_map(val){
             console.log("OK")
             console.log(val)
+            if(val==1){
             $.ajax({
-                url:url_stat,
+                url:url_com,
                 data:{
                     'csrfmiddlewaretoken':csrf_tok,
                     'type':val
                 },
-                method:'POST'
+                method:'POST',
+                success: function(data){
+                    $("#tab").load(url_com);
+                }   
             })
+            } else{
+            $.ajax({
+                url:url_pop,
+                data:{
+                    'csrfmiddlewaretoken':csrf_tok,
+                    'type':val
+                },
+                method:'POST',
+                success: function(data){
+                    $("#tab").load(url_pop);
+                }   
+            })}
            
         }
     
