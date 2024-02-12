@@ -27,13 +27,12 @@
         <h1 class="text-2xl py-3 pt-10">{%if statType == "0"%}Carte de la répartition de la population française{%else%} Carte de la répartition des communes françaises{%endif%}</h1>
         <span class="italic pb-10">Plus un département est foncé, plus il {%if statType == "0"%}est peuplé{%else%}compte de communes{%endif%}</span>
         <div class="flex flex-inline gap-5">
-        <form action="">
-            <button type="submit" name="vue" value="0" class="text-white end-2.5 bottom-2.5 bg-primary hover:bg-blanc hover:text-primary border hover:border-primary transition duration-1000 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-4 py-2 ">Vue population</button>
-        </form>
-        
-        <form action="" class="pb-5">
-            <button type="submit" name="vue" value="1" class="text-white end-2.5 bottom-2.5 bg-primary hover:bg-blanc hover:text-primary border hover:border-primary transition duration-1000 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-4 py-2 ">Vue commune</button>
-        </form>
+            <div>
+            <button id="bt-com" name="vue" value="0" class="text-white end-2.5 bottom-2.5 bg-primary hover:bg-blanc hover:text-primary border hover:border-primary transition duration-1000 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-4 py-2 ">Vue population</button>
+            </div>
+        <div class="pb-5">
+            <button id="bt-pop" name="vue" value="1" class="text-white end-2.5 bottom-2.5 bg-primary hover:bg-blanc hover:text-primary border hover:border-primary transition duration-1000 focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-4 py-2 ">Vue commune</button>
+        </div>
     </div>
 
         <div id="container" style="position: relative; width: 50%; height: 50%;"></div>
@@ -144,272 +143,25 @@
         </div>
 
 
-
-{%if statType == "0" %}
-        <script>
-            var countries = Datamap.prototype.fraTopo.objects.fra.geometries;
-			const MyData = {};
-
-			var series = [];
-
-            function loadCSVData() {
-            return new Promise((resolve, reject) => {
-                d3.csv("{% static 'blog/data.csv' %}", function(data) {
-                    resolve(data);
-                });
-            });
-            }
-
-            loadCSVData().then(data => {
-            for (var i = 0, j = countries.length; i < j; i++) {
-                var a = countries[i].id;
-                var b = countries[i].properties.name;
-                var c = 0;
-
-                for (var k = 0; k < data.length; k++) {
-                    if (data[k].DEP == b) {
-                        c = data[k].PTOT;
-                    }
-                }
-
-                series[i] = [a, c];
-            }
-
-            var dataset = {};
-            var onlyValues = series.map(function(obj) { return obj[1]; });
-            var minValue = Math.min.apply(null, onlyValues),
-                maxValue = Math.max.apply(null, onlyValues);
-
-            var paletteScale = d3.scale.linear()
-                .domain([minValue, maxValue])
-                .range(["#f8efff", "#7C4EE4"]);
-
-            series.forEach(function(item) {
-                var iso = item[0],
-                    value = item[1];
-                dataset[iso] = { numberOfThings: value, fillColor: paletteScale(value) };
-            });
-            var map = new Datamap({
-                    element: document.getElementById('container'),
-                    responsive:true,
-                    geographyConfig: {
-                        dataUrl: null,
-                        popupOnHover: true,
-                        highlightOnHover: true,
-                        borderColor: '#444',
-                        borderWidth: 0.5,
-                    },
-                    scope: 'fra',
-                    data: dataset,
-                    setProjection: function (element) {
-                        var projection = d3.geo.mercator()
-                            .center([3.0, 48.5])
-                            .scale(3500);
-                        var path = d3.geo.path().projection(projection);
-                        return {
-                            path: path,
-                            projection: projection
-                        };
-                    },
-                    geographyConfig: {
-                    popupTemplate: function(geo, data) {
-                    return ['<div class="hoverinfo"><strong>',
-                            'Nombre d\'habitants dans le département ' + geo.properties.name,
-                            ': ' + data.numberOfThings,
-                            '</strong></div>'].join('');
-                }
-            }
-            });
-            
-            }).catch(error => {
-            console.error("Erreur lors du chargement des données CSV :", error);
-            });
-    </script>
-{%endif%}
-
-{%if statType == "1" %}
-        <script>
-            var countries = Datamap.prototype.fraTopo.objects.fra.geometries;
-			const MyData = {};
-
-			var series = [];
-
-            function loadCSVData() {
-            return new Promise((resolve, reject) => {
-                d3.csv("{% static 'blog/data.csv' %}", function(data) {
-                    resolve(data);
-                });
-            });
-            }
-
-            loadCSVData().then(data => {
-            for (var i = 0, j = countries.length; i < j; i++) {
-                var a = countries[i].id;
-                var b = countries[i].properties.name;
-                var c = 0;
-
-                for (var k = 0; k < data.length; k++) {
-                    if (data[k].DEP == b) {
-                        c = data[k].NBCOM;
-                    }
-                }
-
-                series[i] = [a, c];
-            }
-
-            var dataset = {};
-            var onlyValues = series.map(function(obj) { return obj[1]; });
-            var minValue = Math.min.apply(null, onlyValues),
-                maxValue = Math.max.apply(null, onlyValues);
-
-            var paletteScale = d3.scale.linear()
-                .domain([minValue, maxValue])
-                .range(["#f8efff", "#7C4EE4"]);
-
-            series.forEach(function(item) {
-                var iso = item[0],
-                    value = item[1];
-                dataset[iso] = { numberOfThings: value, fillColor: paletteScale(value) };
-            });
-            var map = new Datamap({
-                    element: document.getElementById('container'),
-                    responsive:true,
-                    geographyConfig: {
-                        dataUrl: null,
-                        popupOnHover: true,
-                        highlightOnHover: true,
-                        borderColor: '#444',
-                        borderWidth: 0.5,
-                    },
-                    scope: 'fra',
-                    data: dataset,
-                    setProjection: function (element) {
-                        var projection = d3.geo.mercator()
-                            .center([3.0, 48.5])
-                            .scale(3500);
-                        var path = d3.geo.path().projection(projection);
-                        return {
-                            path: path,
-                            projection: projection
-                        };
-                    },
-                    geographyConfig: {
-                    popupTemplate: function(geo, data) {
-                    return ['<div class="hoverinfo"><strong>',
-                            'Nombre de commune dans le département ' + geo.properties.name,
-                            ': ' + data.numberOfThings,
-                            '</strong></div>'].join('');
-                }
-            }
-            });
-            
-            }).catch(error => {
-            console.error("Erreur lors du chargement des données CSV :", error);
-            });
-    </script>
-{%endif%}
-
-<script>
-    window.addEventListener('resize', function() {
-        map.resize();
-    });
-
-    function removeData(chart) {
-    chart.data.labels.pop();
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.pop();
-    });
-    chart.update();
-}
-
-        let data_get_x = {{x_naissance|safe}};
-        let data_get_y = {{y_naissance|safe}};
-        let data_x = data_get_x
-        let data_y = data_get_y    
-
-
-        const ctx = document.getElementById('myChart');
-     chart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: data_x,
-      datasets: [{
-        label: 'Nombre de naissance',
-        data: data_y,
-        borderWidth: 1,
-        borderColor: "#7C4EE4"
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      },
-      pointStyle: false,
-    },
-  });
-
-  var val = document.getElementById("steps-range").value
-        document.getElementById("steps-range").oninput = function(){
-            update()
-            send_data()
-        }
-        document.getElementById("steps-range-debut").oninput=function(){
-            update()
-            send_data()
-        }
-
-        function update(){
-           var val = document.getElementById("steps-range").value
-           var val_debut = document.getElementById("steps-range-debut").value
-           data_x = []
-           data_y = []
-
-
-           for (var i = 0, j = val; i < j; i++) {
-            data_x[i] = data_get_x[i]
-            data_y[i] = data_get_y[i]
-        }
-            for(var i=0, j= val_debut;i<j;i++){
-                data_x.shift()
-                data_y.shift()
-            }
-        
-        chart.data.datasets = [{
-            label: 'Nombre de naissance',
-            data: data_y,
-            borderWidth: 1,
-            borderColor: "#7C4EE4"
-        }]
-        val = document.getElementById("output-range")
-        val.innerHTML = "Donnée sélectionnée de " + data_x[0] +" jusqu'à " + data_x[data_x.length-1]
-        chart.data.labels = data_x
-        chart.update()
-        }
-
-        function send_data(){
-            var val_fin = document.getElementById("steps-range").value
-            var val_debut_r = document.getElementById("steps-range-debut").value
-            $.ajax({
-                url: "{%url 'blogsite:stat'%}",
-                data:{
-                    'csrfmiddlewaretoken':'{{csrf_token}}',
-                    'valeur_debut':data_x[0],
-                    'valeur_fin':data_x[data_x.length-1],
-                    'int_debut':val_debut_r,
-                    'int_fin':val_fin
-                },
-                method:'POST'
-            })
-        }
-
-</script>
-
-
         {%block footer%}
         {%endblock%}
     </body>
 
+    <script>
+        /*On définit les variables utilisées dans le fichier JS et qui ont besoin de Jinja pour fonctionner*/
+        var data_get_x = {{x_naissance|safe}};
+        var data_get_y =  {{y_naissance|safe}}
+        var url_stat = "{%url 'blogsite:stat'%}"
+        var csrf_tok = '{{csrf_token}}'
+    </script>
+
+    <script src="{% static 'blog/stat.js' %}"></script>
+
+    <script>
+        var carte
+      mapCreate({{statType|safe}}).then(map=>{
+        carte = map
+       })
+    </script>
 
 </html>

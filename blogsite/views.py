@@ -236,10 +236,9 @@ def stat(request):
     d= []
     rows = []
 
-    if request.GET.get('vue') != None:
-        statType = request.GET.get('vue')
-    else:
-        statType = "0"
+    
+    statType = request.POST.get('type',0)
+    print(statType)
 
     for row in csvreader:
         rows.append(row)
