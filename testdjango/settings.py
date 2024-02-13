@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django_non_dark_admin',
     'widget_tweaks',
     'theme',
     'tailwind',

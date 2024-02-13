@@ -1,8 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views import generic
-from django.http import HttpResponseRedirect, Http404, HttpResponse
-from django.template import RequestContext
-from django.template.loader import get_template
+from django.conf import settings
 
 import csv
 import json
@@ -203,8 +200,9 @@ def Erreur500(request):
 def stat(request):
     successForm = request.GET.get('successForm',False)
 
-    fichier_naissance = open("blogsite/static/blog/naissance_data.csv")
+    fichier_naissance = open(str(settings.BASE_DIR) + "/blogsite/static/blog/naissance_data.csv", encoding="utf-8")
     csvreader_naissance = csv.reader(fichier_naissance)
+    print(csvreader_naissance)
     y_naissance= []
     x_naissance = []
     rows_naissance = []
@@ -232,7 +230,7 @@ def stat(request):
     else : 
         form = MailForm()
     
-    fichier = open("blogsite/static/blog/data.csv")
+    fichier = open(str(settings.BASE_DIR) + "/blogsite/static/blog/data.csv", encoding="utf-8")
     csvreader = csv.reader(fichier)
     d= []
     rows = []
@@ -276,7 +274,7 @@ def stat(request):
     return render(request, "blog/stat.html",context)
 
 def com(request):
-    fichier = open("blogsite/static/blog/data.csv")
+    fichier = open(str(settings.BASE_DIR) + "/blogsite/static/blog/data.csv", encoding="utf-8")
     csvreader = csv.reader(fichier)
     d= []
     rows = []
@@ -295,7 +293,7 @@ def com(request):
     return render(request,"blog/tab-stat/com.html",context)
 
 def pop(request):
-    fichier = open("blogsite/static/blog/data.csv")
+    fichier = open(str(settings.BASE_DIR) + "/blogsite/static/blog/data.csv", encoding="utf-8")
     csvreader = csv.reader(fichier)
     d= []
     rows = []
